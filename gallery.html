@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar {
+            background-color: transparent;
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        .navbar h1 {
+            font-size: 1.5em;
+            margin-left: 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 20px;
+        }
+        .contact span {
+            margin: 0 30px; /* 调整每个词的间距 */
+            display: inline-block;
+            width: 200px; /* 设置相同宽度 */
+            text-align: center; /* 中对齐 */
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+            color: white; /* 悬停时更改颜色 */
+        }
+        .no-underline {
+            text-decoration: none !important; /* 移除下划线 */
+        }
+        .gallery-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* 保持整个视口高度 */
+        overflow: hidden; /* 禁止滚动 */
+        }
+        .gallery img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: none;
+            position: absolute;
+            top: 50%; /* 使图片上下居中 */
+            left: 50%; /* 使图片左右居中 */
+            transform: translate(-50%, -50%); /* 使图片居中 */
+        }
+        .gallery img.active {
+            display: block;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+        }
+        .arrow.left {
+            left: 20px;
+        }
+        .arrow.right {
+            right: 20px;
+        }
+        .hover-text {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            text-align: justify;
+        }
+        .hover-text .date-left {
+            float: left;
+        }
+        .hover-text .date-right {
+            float: right;
+        }
+        .hover-text p {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1><a href="index.html" style="font-weight: bold; color: grey;">Home</a></h1>
+        <div>
+            <a class="no-underline" style="font-weight: bold; color: black;">Gallery</a>
+            <a href="exhibition.html" style="font-weight: bold; color: grey;">Exhibition</a>
+            <a href="bio.html" style="font-weight: bold; color: grey;">Biography</a>
+        </div>
+    </div>
+    <div class="gallery-container">
+        <div class="arrow left" onclick="showPreviousImage()">&#9664;</div>
+        <div class="gallery">
+            <img src="image/comingtothetree01.jpg" onmouseover="showText('comingtothetree01')" onmouseout="hideText('comingtothetree01')" class="active">
+            <img src="image/comingtothetree02.jpg">
+            <img src="image/drowningontheroad01.jpg" onmouseover="showText('drowningontheroad01')" onmouseout="hideText('drowningontheroad01')">
+            <img src="image/drowningontheroad02.jpg">
+            <img src="image/drowningontheroad03.jpg">
+            <img src="image/drowningontheroad04.jpg">
+            <img src="image/operatingroom01.jpg" onmouseover="showText('operatingroom01')" onmouseout="hideText('operatingroom01')" >
+            <img src="image/operatingroom02.jpg">
+            <img src="image/operatingroom03.jpg">
+            <img src="image/operatingroom04.jpg">
+            <img src="image/operatingroom05.jpg">
+        </div>
+        <div class="hover-text" id="hoverText"></div>
+        <div class="arrow right" onclick="showNextImage()">&#9654;</div>
+    </div>
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.gallery img');
+        const hoverText = document.getElementById('hoverText');
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                showPreviousImage();
+            } else if (event.key === 'ArrowRight') {
+                showNextImage();
+            }
+        });
+
+        function showPreviousImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            images[currentIndex].classList.add('active');
+        }
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            images[currentIndex].classList.add('active');
+        }
+
+        function showText(imageName) {
+            hoverText.style.display = 'block';// 根据图片名称显示不同的文本内容和日期
+            switch (imageName) {
+            case 'comingtothetree01':
+                    hoverText.innerHTML = `
+                        <div class="date-left">Wednesday</div>
+                        <div class="date-right">October 19, 2022</div>
+                        <div style="background-color: white; padding: 10px;">
+                        <p>
+                            I dreamt that I was cursed. My forehead had been branded with a scalding hot spoon, leaving white letters written in a foreign language I didn’t understand against a black background. When I looked in the mirror, the letters were crunched together..
+                        </p>
+                        <p>
+                            I sought help online to help me translate the message. One comment from online advised me to drink as much noodle soup as possible at a party, and then place a note on a tree describing the curse. He said that the curse could only be lifted by visiting this tree on a rainy day, in the hope that a local Taoist priest or medium would find the note, take pity, and help me.
+                        </p>
+                        <p>
+                            When I went to attach the note, a nearby man asked me if I knew how to break the curse. I told him I did, and soon a crowd gathered around us. I shared the method of breaking the curse with them, but I forgot to mention returning to the tree only on a rainy day. Later, I heard that the man's son had fallen victim to the same curse and was lying in a hospital, his condition worsening. Eventually the man decided to end his son's treatment, declaring it fruitless. This caused his wife to lose her sanity, and she insisted that her son was still alive inside her— even serving meals to him as if he were in her womb.
+                        </p>
+                    `;
+                    break;
+                case 'drowningontheroad01':
+                    hoverText.innerHTML = `
+                        <div class="date-left">Saturday</div>
+                        <div class="date-right">September 03, 2022</div>
+                        <div style="background-color: white; padding: 10px;">
+                        <p>
+                            A group of us got in a minibus taxi to go somewhere, but the driver lost control of the bus. So we ended up stuck at a place I didn’t recognize. When we were finally ready to head home, the news reported that the minibus driver had drowned. Strangely, though, they had found his body on the road.
+                        </p>
+                        <p>
+                            Then, suddenly, we were all on the out-of-control minibus again. We just arrived at the location where we wanted to end. But now I really wanted to get us all back, but the first two passengers who want to go different direction in the cab didn't want to take me. I convinced them to take me by offering to pay a third of the fare, and they agreed. Soon, the others who were on the minibus before got on too. While we were driving back, the driver stopped to buy something, and the minibus started moving on its own. I took over driving, but the minibus was tough to control. I'd turn left and the bus would go right.
+                        </p>
+                        <p>
+                            We ended up stopping next to a construction site where there were workers with lots of wood. For some reason we had scrap wood in the taxi, so we started to dump it there, even though it was really splintery and hard to handle. One of the workers didn't like that we were dumping wood there and sprayed me in the face with a high-pressure water hose. I couldn't breathe, so I grabbed the hose from him and sprayed him back, telling him that spraying someone could drown them. That's when I thought about the taxi driver who had drowned. I was telling the worker about it when I realized everyone else had gone into the building, and I was being left behind. The passenger with me they entered the building to find a bathroom. I had a bad feeling and hurried to catch up with the group, determined to stay with them. The man with the hose kept following me.
+                        </p>
+                    `;
+                    break;
+                case 'operatingroom01':
+                    hoverText.innerHTML = `
+                        <div class="date-left">Tuesday</div>
+                        <div class="date-right">February 16, 2021</div>
+                        <div style="background-color: white; padding: 10px;">
+                        <p>
+                            I went to a game competition and entered a small cabin where I was expected to shoot basketballs. The cabin had 6 rooms despite its size, and when I reached the last one, a surgeon in a white coat asked for my help in completing a task. I agreed and asked him to send me the detail and survey first through message.
+
+                        </p>
+                        <p>
+                            Then I unexpectedly found myself lying on an operating table undergoing surgery by the man I'd just met. I witnessed two nurses bringing in a man on on a gurney and saying they needed to perform an autopsy on his “body,” which was still moving as if he were drunk. When the nurses made the first cut on the man's body, the surgeon in the white coat asked them if they should be using anesthesia. Feeling in danger, I urgently asked the surgeons to stop and sew me up. They did this on my left hip, using dark thread.
+                        </p>
+                        <p>
+                            I left the building quickly, holding my wound. Outside I saw many people who had also left, only to get hit by cars. Fearing for my life, I walked down the road slowly. I met the surgeon who is the man in the white coat, who asked how I was doing. I asked him what surgery he had performed on me, and he replied that it was a kidney removal, but that he hadn’t actually taken out. Relieved, I was about to respond when my kidney fell onto the ground.
+                        </p>
+                    `;
+                    break;
+            }
+
+        }
+
+        function hideText(imageName) {
+            hoverText.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

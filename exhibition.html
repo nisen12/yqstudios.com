@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            text-align: justify;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 1em 0;
+        }
+        p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+        .navbar {
+            background-color: transparent;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .navbar h1 {
+            font-size: 1.5em;
+            margin-left: 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 20px;
+        }
+        .contact {
+            background-color: #transparent;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        .contact p {
+            margin: 60;
+        }
+        .contact span {
+            margin: 0 30px; /* 调整每个词的间距 */
+            display: inline-block;
+            width: 200px; /* 设置相同宽度 */
+            text-align: center; /* 中对齐 */
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+            color: white; /* Change color on hover */
+        }
+        .no-underline {
+            text-decoration: none !important; /* 移除下划线 */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1><a href="index.html" style="font-weight: bold; color: grey;">Home</a></h1>
+        <div>
+            <a href="gallery.html" style="font-weight: bold; color: grey;">Gallery</a>
+            <a class="no-underline" style="font-weight: bold; color: black;">Exhibition</a>
+            <a href="bio.html" style="font-weight: bold; color: grey;">Biography</a>
+        </div>
+    </div>
+    <div class="contact">
+        <p>
+            <span>Number</span> <span>Email</span> <span>Ins</span>
+        </p>
+
+        <p>
+            <span>+1 (516) 815-9666</span> <span>q@yqstudios.com</span> <span>nisen12</span>
+        </p>
+    </div>
+</body>
+</html>
