@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quan Yuan - Drowning on the road</title>
+    
+    <meta name="description" content="Quan Yuan's photography project: Drowning on the road, 2024">
+    <meta name="keywords" content="Quan Yuan, photography, Drowning on the road, art, exhibition">
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #1d1d1d;
+        overflow-x: hidden;
+    }
+
+    a, p, h1, h2, h3, h4, h5, h6, div, span, ul, ol, li {
+        color: white; 
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2.1%;
+        padding-right: 2.1%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: transparent;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        font-size: smaller;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 5px;
+    }
+
+
+    .navbar a:hover {
+        color: none;
+    }
+
+    .content {
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .content h5 {
+        font-size: 1em;
+        display: inline-block;
+        transform-origin: left;
+        margin-right: 5px;
+    }
+
+    .content a {
+        text-decoration: none;
+    }
+
+    .main-content {
+        background-color: #1d1d1d;
+        /* width: 100%; */
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .sidebar .row {
+        display: flex;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .sidebar .col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        height: 2.3vh;
+        margin-bottom: 0px;
+        margin: 0px;
+    }
+
+    .sidebar a:hover {
+        text-decoration: none;
+    }
+
+    .sidebar p {
+        margin: 0px;
+        height: 2.3vh;
+    }
+
+    .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    justify-content: space-between;
+}
+
+.image-container img.vertical {
+    width: 32%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+.image-container img.landscape {
+    width: 66%; /* 横向照片占一整行 */
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+.lightbox-content {
+    margin: 0;
+    display: block;
+    width: 90%;
+    max-width: 568px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the image */
+    position: relative;
+}
+
+.lightbox-content.landscape {
+    width: auto;
+    height: 100%; /* 维持纵横比不变 */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.close {
+    position: absolute;
+    top: 2%;
+    right: 3%;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.image-container :hover {
+    opacity: 0.8;
+}
+
+.image-container p {
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 3px;
+    margin-bottom: 5%;
+    font-size: 2%;
+}
+
+.container, .container p, .container a {
+    font-size: 80%;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.section p {
+    font-size: 40%;
+    font-weight: 500;
+}
+
+.sidebar .row .col {
+    padding-left: 0%;
+}
+
+.sidebar .row .col:nth-child(2) {
+    flex: 0 0 16%;
+    padding-left: 31%;
+}
+
+.sidebar .row .col:nth-child(3) {
+    padding-bottom: 20px;
+}
+
+.sidebar .col > a[href="imprint.html"] {
+    margin-top: 20px;
+}
+
+.extra-links {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.extra-links a {
+    /* font-size: 90%; */
+    margin: 2px 0;
+    color: gray;
+}
+
+.section a {
+    font-size: 270%;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.intro, .info {
+    display: flex;
+    padding-top: 0;
+    align-items: flex-start; /* Ensures top alignment */
+}
+
+.info {
+    margin-bottom: 150px;
+}
+
+.details, .paper {
+    width: 50%; /* Set initial width for larger screens */
+}
+
+.text {
+    width: 100%;
+}
+
+.about {
+    margin-left: 1%;
+    width: 104%;
+}
+
+.text {
+    overflow: hidden; /* Handles overflow */
+}
+
+.back-to-top {
+    display: block;
+    text-align: center;
+    margin-bottom: 80px;
+    color: grey;
+    text-decoration: none;
+    font-size: .8em;
+    width: 100%;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+@media (max-width: 768px) {
+    .section p {
+        font-size: 2.5vw;
+        font-weight: 500;
+    }
+    .section d {
+        font-size: 2.5vw;
+    }
+    .intro {
+        width: 100%;
+    }
+    .details, .paper {
+        width: 50%; /* Adjust width for larger screens */
+    }
+    .info {
+        flex-direction: column; /* Stacks .paper and .text vertically */
+        align-items: flex-start; /* Aligns items to the left */
+    }
+    .details {
+        width: 50%; /* Full width for each on smaller screens */
+        margin-left: 0;
+    }
+    .about {
+        width: 100%;
+        margin-left: 0;
+    }
+    .sidebar .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .section {
+        padding-top: 6%;
+    }
+    .lightbox-content {
+        width: 80%; /* Increase width for smaller screens */
+    }
+    .prev, .next {
+        color: transparent;
+    }
+    .image-text-block {
+        width: 100%;
+        margin: 0;
+    }
+
+    .sidebar .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sidebar .row .col {
+        padding-left: 0;
+        margin-left: 0;
+        padding-bottom: 8%;
+    }
+    .main-content .row {
+        flex-direction: column;
+        margin-left: 0;
+    }
+    .footer-content .col {
+        margin: 0;
+        padding: 0;
+    }
+    .sidebar .row .col:nth-child(2) {
+        padding-left: 0;
+        padding-bottom: 8%;
+    }
+    .sidebar .row .col:nth-child(3) {
+        margin-bottom: 10px;
+    }
+    .content {
+        /* padding-left: 1%; */
+        /* padding-right: 1%; */
+    }
+    .image-container {
+        /* padding-left: 7px; */
+        /* padding-right: 7px; */
+        margin-bottom: 15px;
+    }
+
+    .extra-links {
+        /* padding-right: 10px; */
+        margin-bottom: -20px;
+        margin-top: -5%;
+    }
+    .image-container p, .navbar a, .sidebar a, .sidebar p, .container p, .extra-links a {
+        font-size: 2.5vw;
+    }
+    .section a {
+        font-size: 8.5vw;
+    }
+        .lightbox-content.landscape {
+    /* width: auto; */
+    /* height: 104%; */
+    max-width: 94%;
+}
+}
+</style>
+<body>
+    <a id="top"></a>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="index.html">Quan Yuan</a>
+        <a href="publications.html">Publications</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+        <div class="content">
+            <div class="extra-links">
+                <a href="paperdream.html">← Paper dream</a>
+            </div>
+            <p style="width: 100%; margin-top: 20px; font-size: 25px; font-weight: 70;">Drowning on the road</p>
+            <div class="image-container">
+                <img src="image/paperdream/drowningontheroad02.jpg" alt="Image 1" class="image-container-img landscape">
+                <img src="image/paperdream/drowningontheroad03.jpg" alt="Image 2" class="image-container-img vertical">
+                <img src="image/paperdream/drowningontheroad04.jpg" alt="Image 3" class="image-container-img vertical">
+                <img src="image/paperdream/drowningontheroad01.jpg" alt="Image 4" class="image-container-img landscape">
+            </div>
+
+            <!-- Inserted section starts here -->
+            <div class="section">
+                <a>Drowning on the road</a>
+                <div class="intro">
+                    <div class="details">
+                        <d>Date</d>
+                        <hr style="border: 0; border-top: 1px solid white; margin-bottom: 25px;">
+                    </div>
+                    <div class="about">
+                        <d>About</d>
+                        <hr style="border: 0; border-top: 1px solid white; margin-bottom: 25px;">
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="paper">
+                        <p>Saturday</p>
+                        <p>September 3rd, 2022</p>
+                    </div>
+                    <div class="text">
+                        <p style="padding-bottom: 20px;">A group of us got on a minibus taxi to go somewhere, but the driver lost control of the bus. We ended up stuck at a place I didn’t recognize. When we were finally ready to head home, the news reported that the minibus driver had drowned. Strangely, though, they had found his body on the road.</p>
+                        <p style="padding-bottom: 20px;">I really wanted to get us all back home, but two of the passengers wanted to go in a different direction and didn't want to take me. I convinced them to take me by offering to pay a third of the fare, and they agreed. Soon, the others who were on the minibus before got back on too. While we were driving back, the driver stopped to buy something, and the minibus started moving on its own. I took over the driving, but the minibus was tough to control. I'd turn left and the bus would go right.</p>
+                        <p style="padding-bottom: 20px;">We ended up stopping next to a building with a construction site beside it. The workers on the site had lots of wood. For some reason we had scrap wood in the taxi, so we started to dump it there, even though it was really splintery and hard to handle. One of the workers didn't like our dumping wood there and sprayed me in the face with a high-pressure water hose. I couldn't breathe, so I grabbed the hose from him and sprayed him back, telling him that spraying someone could drown them. That's when I thought about the taxi driver who had drowned. I was telling the worker about it when I realized I was lagging behind the others who went into the building. A passenger who was with me entered the building to find a bathroom. I had a bad feeling and hurried to catch up with the group, determined to stay with them. The man with the hose kept following me.</p>
+                        <!-- More paragraphs can be added as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <div class="container">
+        <a href="#top" class="back-to-top">Back to top</a>
+        <div style="display: flex; align-items: flex-start; margin-bottom: -10px;">
+            <p>Quan Yuan Photographer </p>
+        </div>
+        <div class="sidebar">
+            <div class="row">
+                <div class="col" style="padding-top: 10px;">
+                    <p>q@yqstudios.com</p>
+                    <p>New York, NY</p>
+                </div>
+                <div class="col">
+                    <a href="mailto:q@yqstudios.com">Email</a>
+                    <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
+                    <a href="https://www.linkedin.com/in/quanyuan/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="col">
+                    <a href="project.html">Project →</a>
+                    <a href="publications.html">Publications →</a>
+                    <a href="about.html">About →</a>
+                    <a href="contact.html">Contact →</a>
+                    <a href="imprint.html">All rights reserved by Quan Yuan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content">
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    let modal = document.getElementById('lightbox');
+    let images = document.getElementsByClassName('image-container-img');
+    let modalImg = document.querySelector('.lightbox-content');
+    let closeBtn = document.querySelector('.close');
+    let nextBtn = document.querySelector('.next');
+    let prevBtn = document.querySelector('.prev');
+    let currentIndex = 0;
+
+    for (let i = 0; i < images.length; i++) {
+        images[i].onclick = function() {
+            modal.style.display = "block";
+            document.body.classList.add('no-scroll'); // 禁用页面滚动
+            modalImg.src = this.src;
+            currentIndex = i;
+
+            // Check if the clicked image has the 'landscape' class and adjust the lightbox image size
+            if (this.classList.contains('landscape')) {
+                modalImg.classList.add('landscape');
+            } else {
+                modalImg.classList.remove('landscape');
+            }
+        }
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        document.body.classList.remove('no-scroll'); // 恢复页面滚动
+    }
+
+    // 点击图片关闭lightbox
+    modalImg.onclick = function() {
+        if (window.innerWidth <= 768) { // 只在小屏幕上启用点击图片关闭
+            modal.style.display = "none";
+            document.body.classList.remove('no-scroll'); // 恢复页面滚动
+        }
+    }
+
+    function showImage(step) {
+        currentIndex += step;
+        if (currentIndex >= images.length) {
+            currentIndex = 0;
+        } else if (currentIndex < 0) {
+            currentIndex = images.length - 1;
+        }
+        modalImg.src = images[currentIndex].src;
+
+        // Check if the new image has the 'landscape' class and adjust the lightbox image size
+        if (images[currentIndex].classList.contains('landscape')) {
+            modalImg.classList.add('landscape');
+        } else {
+            modalImg.classList.remove('landscape');
+        }
+
+        modalImg.classList.add('fade');
+        setTimeout(() => modalImg.classList.remove('fade'), 300); // 添加淡入淡出效果
+    }
+
+    nextBtn.onclick = function() {
+        showImage(1);
+    }
+
+    prevBtn.onclick = function() {
+        showImage(-1);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') {
+            showImage(1);
+        } else if (event.key === 'ArrowLeft') {
+            showImage(-1);
+        } else if (event.key === 'Escape') {
+            modal.style.display = "none";
+            document.body.classList.remove('no-scroll'); // 恢复页面滚动
+        }
+    });
+
+    let touchstartX = 0;
+    let touchendX = 0;
+    const threshold = 100; // 定义滑动有效的最小距离
+
+    modalImg.addEventListener('touchstart', function(e) {
+        touchstartX = e.changedTouches[0].screenX;
+    });
+
+    modalImg.addEventListener('touchend', function(e) {
+        touchendX = e.changedTouches[0].screenX;
+        handleGesture();
+    });
+
+    function handleGesture() {
+        if (touchendX + threshold < touchstartX) {
+            showImage(1); // 向左滑动查看下一张图片
+        }
+        if (touchendX - threshold > touchstartX) {
+            showImage(-1); // 向右滑动查看上一张图片
+        }
+    }
+
+    // 为滑动动画添加简单的淡入淡出效果
+    modalImg.classList.add('fade');
+    setTimeout(() => modalImg.classList.remove('fade'), 300);
+
+    // 平滑滚动到顶部
+
+});
+
+    </script>
+</body>
+</html>
