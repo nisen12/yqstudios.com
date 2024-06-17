@@ -164,24 +164,22 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    .navbar a[href='project.html'],
+    .navbar a[href='publications.html'],
+    .navbar a[href='about.html'],
+    .navbar a[href='contact.html'] {
+        display: none;
+    }
     .sidebar .row {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .sidebar .row .col {
-    padding-left: 0%;
-    flex: 1;
-}
+
 
 .sidebar a, .sidebar p {
     margin: 0; /* 去掉链接和段落的外边距 */
 }
 
-.container, .container p, .container a {
-    font-size: 80%;
-    margin-left: 10px;
-    font-weight: bold;
-}
             .main-content .row {
                 flex-direction: column;
                 margin-left: 0;
@@ -192,23 +190,16 @@ h1 {
             }
             .sidebar .row .col:nth-child(2) {
                 padding-left: 0; /* 重置左填充以与第一列对齐 */
-                padding-bottom: 8%;
+                padding-bottom: 0%;
             }
             .sidebar .row .col:nth-child(3) {
-                margin-bottom: 10px;
+                margin-bottom: 0px;
             }
-
-
-    .content {
-        flex-direction: column; /* 在小屏幕上改为垂直布局 */
-
-    padding-left: 4%;
-
-
 
 h1 {
     font-size: 3em;
     margin-bottom: 0.5em;
+}
 }
 
 @media (max-width: 768px) {
@@ -216,20 +207,27 @@ h1 {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .sidebar .row .col {
+    .sidebar .row .col {
     padding-left: 0%;
     flex: 1;
+    padding-bottom: 5%;
 }
 
 .sidebar a, .sidebar p {
     margin: 0; /* 去掉链接和段落的外边距 */
 }
 
-.container, .container p, .container a {
-    font-size: 80%;
-    margin-left: 10px;
-    font-weight: bold;
+.sidebar .col a[href='project.html'],
+    .sidebar .col a[href='publications.html'],
+    .sidebar .col a[href='about.html'],
+    .sidebar .col a[href='contact.html'] {
+        display: none;
+    }
+
+.container p{
+    margin-left: 0px;
 }
+
             .main-content .row {
                 flex-direction: column;
                 margin-left: 0;
@@ -240,10 +238,10 @@ h1 {
             }
             .sidebar .row .col:nth-child(2) {
                 padding-left: 0; /* 重置左填充以与第一列对齐 */
-                padding-bottom: 8%;
+                padding-bottom: 0%;
             }
             .sidebar .row .col:nth-child(3) {
-                margin-bottom: 10px;
+                margin-bottom: 0px;
             }
 
 
@@ -261,7 +259,6 @@ h1 {
 
     }
     .main-content {
-                padding-left: 4%;
                 padding-right: 1%;
             }
             .image-container img {
