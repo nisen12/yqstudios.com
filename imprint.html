@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quan Yuan - Drowning on the road</title>
+    
+    <meta name="description" content="Quan Yuan's imprint">
+    <meta name="keywords" content="Quan Yuan, imprint, copyright">
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #eeeeee;
+        overflow-x: hidden;
+
+    }
+
+    a, p, h1, h2, h3, h4, h5, h6, div, span, ul, ol, li {
+        color: black; 
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2.1%;
+        padding-right: 2.1%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: transparent;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        font-size: smaller;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 5px;
+    }
+
+
+    .navbar a:hover {
+        color: none;
+    }
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Align items on large screens */
+    align-items: flex-start;
+    padding: 100px 2% 150px;
+}
+
+.image-container {
+    flex: 1 1 30%; /* Allows flexing but starts at 30% */
+    margin-right: 2%; /* Space between image and text */
+}
+
+    .main-content {
+        background-color: #eeeeee;
+        /* width: 100%; */
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .sidebar .row {
+        display: flex;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .sidebar .col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        height: 2.3vh;
+        margin-bottom: 0px;
+        margin: 0px;
+    }
+
+    .sidebar a:hover {
+        text-decoration: none;
+    }
+
+    .sidebar p {
+        margin: 0px;
+        height: 2.3vh;
+    }
+
+.container, .container p, .container a {
+    font-size: 80%;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
+.sidebar .row .col {
+    padding-left: 0%;
+}
+
+.sidebar .row .col:nth-child(2) {
+    flex: 0 0 16%;
+    padding-left: 31%;
+}
+
+.sidebar .row .col:nth-child(3) {
+    padding-bottom: 20px;
+}
+
+.sidebar .col > a[href="imprint.html"] {
+    margin-top: 20px;
+}
+.all {
+        display: flex;
+}
+
+
+.text {
+    flex: 1 1 67%; /* Flexes to use remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 1.3vw;
+    font-family: baghdad;
+}
+.text p{
+    margin-bottom: 0; /* Removes bottom margin */
+    padding-bottom: 0; /* Removes bottom padding */
+}
+
+
+.about {
+    margin-left: 1%;
+    width: 104%;
+}
+
+
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+.image-container :hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .sidebar .row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .sidebar .row .col {
+    padding-left: 0%;
+    flex: 1;
+}
+
+.sidebar a, .sidebar p {
+    margin: 0; /* 去掉链接和段落的外边距 */
+}
+
+.container, .container p, .container a {
+    font-size: 80%;
+    margin-left: 10px;
+    font-weight: bold;
+}
+            .main-content .row {
+                flex-direction: column;
+                margin-left: 0;
+            }
+            .footer-content .col {
+                margin: 0;
+                padding: 0;
+            }
+            .sidebar .row .col:nth-child(2) {
+                padding-left: 0; /* 重置左填充以与第一列对齐 */
+                padding-bottom: 8%;
+            }
+            .sidebar .row .col:nth-child(3) {
+                margin-bottom: 10px;
+            }
+
+
+    .content {
+        flex-direction: column; /* 在小屏幕上改为垂直布局 */
+    }
+    .image-container, .text {
+        width: 100%; /* Each takes full width of the container */
+        margin-right: 0; /* Remove margin for stacking */
+    }
+
+    .image-container {
+        width: 100%; /* 图片宽度调整为100% */
+        margin-right: 0; /* 移除间隙 */
+    }
+
+    .text {
+        width: 100%; /* 文字内容宽度调整为100% */
+        text-align: justify;
+        font-size: 2.5vw;
+        margin-top: 4%;
+        font-weight: 500;
+
+    }
+    .content {
+                padding-left: 1%;
+                padding-right: 1%;
+            }
+            .image-container img {
+                width: 100%;
+                height: auto;
+            }
+
+    .image-container p, .navbar a, .sidebar a, .sidebar p, .container p, .extra-links a {
+        font-size: 2.5vw;
+    }
+    .cv-link {
+        margin-left: 0; /* 在小屏幕上取消左边距 */
+        width: 100%; /* 让链接占满整个容器宽度 */
+        text-align: right; /* 将链接居中显示 */
+    }
+
+}
+</style>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="index.html">Quan Yuan</a>
+        <a href="publications.html">Publications</a>
+        <a href="project.html">Projects</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+        <div class="content">
+            <p style="width: 100%; margin-top: 20px; margin-bottom: 20px; font-size: 40px; font-weight: 300;">Imprint</p>
+            <div class="info">
+            <div class="text">
+                        <p>Quan Yuan</p>
+                        <p>United States</p>
+                        <p>Email: q@yqstudios.com</p>
+                        <p style="padding-bottom: 20px; margin: 0;">Phone: +1 (516) 815-9666</p>
+                        <!-- More paragraphs can be added as needed -->
+                    </div>
+                    <div class="text">
+                        <p>Disclaimer</p>
+                        <p style="padding-bottom: 20px; margin: 0;">Quan Yuan assumes no responsibility for the correctness, accuracy, timeliness, reliability, and completeness of the information provided on this website. Any reliance you place on such information is strictly at your own risk. Quan Yuan shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of the use or inability to use this website, including but not limited to damages for loss of profits, data, or other intangible losses.</p>
+                    </div>
+                    <div class="text">
+                        <p>Copyright</p>
+                        <p style="padding-bottom: 20px; margin: 0;">All content, images, photos, or other files on this website are protected by copyright law and belong exclusively to Quan Yuan or the specifically named rights holders. Unauthorized use, reproduction, distribution, or modification of any content on this website is strictly prohibited without the prior written consent of the copyright holder.</p>
+
+                    </div>
+                </div>            
+    </div>
+
+
+    <!-- Footer section -->
+    <div class="container">
+        <div style="display: flex; align-items: flex-start; margin-bottom: -10px;">
+            <p>Quan Yuan Photographer </p>
+        </div>
+        <div class="sidebar">
+            <div class="row">
+                <div class="col" style="padding-top: 10px;">
+                    <p>q@yqstudios.com</p>
+                    <p>New York, NY</p>
+                </div>
+                <div class="col">
+                    <a href="mailto:q@yqstudios.com">Email</a>
+                    <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
+                    <a href="https://www.linkedin.com/in/quanyuan/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="col">
+                    <a href="project.html">Project →</a>
+                    <a href="publications.html">Publications →</a>
+                    <a href="about.html">About →</a>
+                    <a href="contact.html">Contact →</a>
+                    <a href="imprint.html">All rights reserved by Quan Yuan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
