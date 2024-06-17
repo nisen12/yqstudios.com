@@ -112,6 +112,12 @@
         margin: 0px;
         height: 2.3vh;
     }
+    .imgblock{
+        width: 100%;
+        display: flex;
+        gap: 2%;
+
+    }
 
     .image-container {
     gap: 0;
@@ -234,6 +240,10 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    .imgblock {
+        display: flex;
+        flex-direction: column;
+    }
     .section p {
         font-size: 2.5vw;
         font-weight: 500;
@@ -360,6 +370,7 @@ h1 {
                 <a href="pleaseremember.html">Next →</a>
             </div>
             <p style="width: 100%; margin-top: 20px; font-size:25px; font-weight: 70;">Paper Dream</p>
+                <div class ="imgblock">
             <div class="image-container" style="width:100%">
             <a href="operatingroom.html">
                 <img src="image/paperdream/operatingroom02.jpg" alt="Operating Room 02">
@@ -377,6 +388,7 @@ h1 {
                 <img src="image/paperdream/comingtothetree01.jpg" alt="coming to the tree">
             </a>
             <p>Coming to the tree, 2020</p>
+        </div>
         </div>
 
             <!-- Inserted section starts here -->
