@@ -165,28 +165,48 @@ h1 {
     margin-bottom: 0.5em;
 }
 .cv-link {
-    align-self: flex-start; /* 确保链接在容器的顶部 */
-    margin-left: auto; /* 推动链接到最右边 */
+    flex: 0 1 auto; /* 允许这个元素根据内容调整宽度 */
+    text-align: right;
 }
 .cv-link a {
     color: black;
     text-decoration: none; /* 移除下划线 */
-    font-weight: bold; /* 加粗 */
+    font-weight: bolder; /* 加粗 */
 }
 .cv-link a:hover {
             color: gray;
+            text-decoration: underline;
 }
 .info p {
     margin-bottom: 0px; /* 原来如果是更大的值，现在减少它 */
     margin-top: 0px;
-    font-size: 101%;
+    font-size: 28%;
         padding-bottom: 1px;
-        font-weight: 400;
+        font-weight: bold;
+}
+.info2 p {
+    margin-bottom: 0px; /* 原来如果是更大的值，现在减少它 */
+    margin-top: 0px;
+    font-weight: 400;
+    font-size: 1.1vw;
+}
+.info{
+    display: flex;
+        gap: 2px;
+        font-size: 3.1vw;
+        justify-content: space-between;
+
+}
+.info2{
+    text-align: right;
+
 }
 .contact{
-        padding-left: 2%;
-    padding-right: 2%;
+    display: flex;
+    justify-content: space-between; /* 这将确保子元素分散到两端 */
+    width: 100%; /* 占据全部可用宽度 */
     padding-bottom: 150px;
+    justify-content: flex-end;
 }
 
 
@@ -276,8 +296,12 @@ h1 {
     }
     .cv-link {
         margin-left: 0; /* 在小屏幕上取消左边距 */
+        margin-bottom : ;
         width: 100%; /* 让链接占满整个容器宽度 */
         text-align: right; /* 将链接居中显示 */
+    }
+    .info2 p{
+        font-size: 3.3vw;
     }
 }
 </style>
@@ -296,32 +320,34 @@ h1 {
             <p style="width: 100%; margin-top: 20px; margin-bottom: 20px; font-size: 40px; font-weight: 300;">About</p>
             <div class="image-container">
                 <img src="image/me.jpg" class="image-container-img"style="width: 100%;">
+                <div class="info">
+                        <p>Photographer</p>
+                        <p>Graphic Designer</p>
+                        <p>Visual Director</p>
+                    </div>
             </div>
             <div class="text">
                         <p style="padding-bottom: 10px; margin: 0;">Quan Yuan is a New York City-based fine-art photographer and curator who delves into the realm of still-life photography, scrutinizing human perception of everyday objects and the surreal interplay between reality and fabrication. Her work frequently investigates how inanimate objects can be infused with life through the photographic lens, thereby challenging our standard views of reality and augmenting our understanding of the material world.</p>
                         <p style="padding-bottom: 20px; margin: 0;">Quan's approach combines meticulous set design and innovative lighting techniques with digital manipulation, blurring the lines between the tangible and the imagined. Her projects often start with intensive conceptual research, drawing inspiration from a variety of sources including historical art movements, contemporary visual culture, and personal introspection. Her studies in psychology at Zhejiang University of Technology further enrich her methodology, enabling her to incorporate psychological theories into her exploration of perception and the subconscious.</p>
                         <p style="padding-bottom: 20px; margin: 0;">A significant aspect of her research involves engaging with a wide array of academic and creative materials, from classic psychological texts to modern experimental art. This multidisciplinary approach allows Quan to deepen her understanding of the psychological elements that influence human interaction with visual stimuli, thereby informing the conceptual underpinnings of her photographic work.</p>
                         <p style="padding-bottom: 20px; margin: 0;">Quan’s dedication to transforming everyday materials into complex, thought-provoking images invites viewers to reconsider their interactions with the ordinary. By manipulating how objects are perceived, she questions the authenticity of the image and the interpretive responsibility of the viewer.</p>
-                        <p style="padding-bottom: 20px; margin: 0;">Her prowess extends beyond photography into curating compelling exhibitions that bring together diverse artistic expressions to explore shared themes. Her works and curatorial projects have been showcased in several solo and group exhibitions, including the “Mentor Show 2022” exhibition with Bill Jacobson, and the introspective solo exhibition "Please Remember" at theBlanc Gallery, New York (2022). Upcoming projects include her participation in the notable "Paper Dreams" at the SVA MPS Digital Photography Thesis Exhibition in New York (2024).</p>
+                        <p style="padding-bottom: 20px; margin: 0;">Her prowess extends beyond photography into curating compelling exhibitions that bring together diverse artistic expressions to explore shared themes. Her works and curatorial projects have been showcased in several solo and group exhibitions, including the “Mentor Show 2022” exhibition with Bill Jacobson, and the introspective solo exhibition "Please Remember" at theBlanc Gallery, New York (2022). Upcoming projects include her participation in the notable "Paper Dreams" at group Exhibition "In/Flux" in New York (2024).</p>
                         <!-- More paragraphs can be added as needed -->
-                    </div>
-                    <div class="cv-link">
-            <p><a href="image/Yuan_Q_CV.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
-        </div>   
-        </div>      
-    <div class="contact">
-    <div class="info">
-                        <p>Photographer</p>
-                        <p>Graphic Designer</p>
-                        <p style="padding-bottom: 20px; margin: 0;">Visual Director</p>
-                    </div>
-                    <div class="info">
-                        <p href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">@nisen12</p>
+                        </div>
+                        <div class="contact">
+                        <div class="info2">
+                            <p style="font-weight: 500;">contact:</p>
+                            <p>+1 (516) 815-9666</p>
                         <p href="mailto:q@yqstudios.com">q@yqstudios.com</p>
-                        <p>+1 (516) 815-9666</p>
-                        <p style="padding-bottom: 20px; margin: 0;">New York, NY</p>
-                    </div>
-                </div>
+                        <p href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">@nisen12</p>     
+                        
+                    
+                        <div class="cv-link" style="padding-top:10px;">
+            <p><a href="image/Yuan_Q_CV.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>  
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Footer section -->
     <div class="container">
