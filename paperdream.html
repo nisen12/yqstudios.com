@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quan Yuan - Paper Dream</title>
+    <title>Quan Yuan - paperdream</title>
     <link rel="icon" type="image/svg+xml" href="image/yqlogo.svg">
     
     <meta name="description" content="Quan Yuan's photography project: paperdream, 2024">
@@ -116,14 +116,19 @@
     .imgblock{
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         gap: 2%;
+        justify-content: space-between;
+    align-items: flex-end;
 
     }
 
     .image-container {
-    gap: 0;
-    margin: 0; /* 确保容器周围没有额外的外边距 */
-    padding: 0;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    margin-bottom: 2%;
+    width: 49%;
 }
 .image-container :hover {
     opacity: 0.8;
@@ -146,13 +151,13 @@
 }
 
 .container, .container p, .container a {
-    font-size: .5VW;
+    font-size: 80%;
     margin-left: 10px;
     font-weight: bold;
 }
 
 .section p {
-    font-size: .7VW;
+    font-size: 40%;
     font-weight: 500;
 }
 
@@ -370,26 +375,27 @@ h1 {
             <div class="extra-links">
                 <a href="pleaseremember.html">Next →</a>
             </div>
-            <p style="display: flex;justify-content: space-around;width: 100%; margin-top: 20px; font-size:25px; font-weight: 70;">Paper Dream</p>
+            <p style="width: 100%; margin-top: 20px; font-size:25px; font-weight: 70;">Paper Dream</p>
                 <div class ="imgblock">
-            <div class="image-container" style="width:100%">
+            <div class="image-container">
             <a href="operatingroom.html">
                 <img src="image/paperdream/operatingroom02.jpg" alt="Operating Room 02">
             </a>
             <p>Operating room, 2024</p>
         </div>
-        <div class="image-container"style="width:100%">
+        <div class="image-container">
             <a href="drowningontheroad.html">
                 <img src="image/paperdream/drowningontheroad01.jpg" alt="drowning on the road 01">
             </a>
             <p>Drowning on the road, 2022</p>
         </div>
-        <div class="image-container"style="width:100%">
+        <div class="image-container">
             <a href="comingtothetree.html">
                 <img src="image/paperdream/comingtothetree01.jpg" alt="coming to the tree">
             </a>
             <p>Coming to the tree, 2020</p>
         </div>
+        <a href="video/paperprocess.mp4">Video →</a>
         </div>
 
             <!-- Inserted section starts here -->
@@ -439,7 +445,7 @@ h1 {
                 <div class="col">
                     <a href="mailto:q@yqstudios.com">Email</a>
                     <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
-                    <a href="https://www.linkedin.com/in/quan-yuan-5a509a17a/" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/quanyuan/" target="_blank">LinkedIn</a>
                 </div>
                 <div class="col">
                     <a href="project.html">Project →</a>
