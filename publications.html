@@ -200,7 +200,7 @@
     }
 
 .container, .container p, .container a {
-    font-size: .5VW;
+    font-size: 80%;
     margin-left: 10px;
     font-weight: bold;
 }
@@ -421,10 +421,52 @@ h1 {
     <div class="main-content">
          <div class="content">
             <p style="width: 100%; margin-top: 20px; margin-bottom: 20px; font-size: 40px; font-weight: 300;">Publications</p>
+
             <div class="all">
-                <div class="image-block">
+            <div class="image-block">
+        <div class="image-container" onclick="openLightbox(slides4, 1)">
+            <img src="image/book/dreamb/1.jpg" style="width: 100%;">
+        </div>
+        </div>
+        <div class="text">
+
+            <f>Paper Dream</f>
+            <a>Exploring the Unconscious through Photography.</a>
+            <a>Reflecting on the transient nature of dreams and their impact on personal growth.</a>
+            <a>"Paper Dream is Quan Yuan’s exploration of her own unconscious mind. Its photographs depict dreams she has recorded through small, elaborate sets hand-built from paper. The project’s purpose is to offer viewers a window into her inner life. this book include her dream diary."</a>
+            <a>Jul. 2024</a>
+            <p>Photography</p>
+            <p>11 images</p>
+            <p>Paper, rigid board</p>
+            <p>Book sets</p>
+            <p>Package size: 19cm x 22cm; Book: 18cm x 21cm; Postcard size: 10cm x 10cm</p>
+        </div>
+    </div>
+
+            <div class="all">
+            <div class="image-block">
+        <div class="image-container" onclick="openLightbox(slides3, 1)">
+             <img src="image/book/wood/03.jpg" alt="Featured Image" style="width: 100%;">
+        </div>
+        </div>
+        <div class="text">
+            <f>Wood Balloons</f>
+            <a>Impressions of Fragility and Ephemeral Beauty.</a>
+            <a>Stories and reflections on the delicate nature of dreams and fleeting moments.</a>
+            <a>"In 'Balloon Dreams,' each wooden block, shows different side of balloon. They embody the ephemeral nature of balloon and the delicate balance of life's fleeting moments. The wooden blocks that frame this work symbolize the contrast between the solid and the transient, reflecting the delicate beauty of what is often overlooked."</a>
+            <a>Dec 2023</a>
+
+            <p>Transfer prints on wooden blocks</p>
+            <p>4 blocks, 5 prints per block</p>
+            <p>Reclaimed wood</p>
+            <p>Transfer prints</p>
+        </div>
+    </div>
+
+            <div class="all">
+            <div class="image-block">
         <div class="image-container" onclick="openLightbox(slides1, 1)">
-                    <img src="image/book/momgarden/01.jpg" alt="Featured Image" style="width: 100%;">
+            <img src="image/book/momgarden/01.jpg" alt="Featured Image" style="width: 100%;">
         </div>
         </div>
         <div class="text">
@@ -445,9 +487,10 @@ h1 {
         <div class="all">
             <div class="image-block">
         <div class="image-container" onclick="openLightbox(slides2, 1)">
-                    <img src="image/book/dictionary/01.jpg" style="width: 50%;">
+            <img src="image/book/dictionary/01.jpg" style="width: 50%;">
         </div>
         </div>
+
         <div class="text">
 
             <f>Reconstructed Dictionaries</f>
@@ -480,7 +523,7 @@ h1 {
                 <div class="col">
                     <a href="mailto:q@yqstudios.com">Email</a>
                     <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
-                    <a href="https://www.linkedin.com/in/quan-yuan-5a509a17a/" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/quanyuan/" target="_blank">LinkedIn</a>
                 </div>
                 <div class="col">
                     <a href="project.html">Project →</a>
@@ -510,6 +553,14 @@ h1 {
         var slides2 = [
             "image/book/dictionary/01.jpg", "image/book/dictionary/02.jpg", 
             "image/book/dictionary/04.jpg", "image/book/dictionary/05.jpg"
+        ];
+
+        var slides3 = [
+            "image/book/wood/03.jpg", "image/book/wood/02.jpg", "image/book/wood/04.jpg",  "image/book/wood/01.jpg"
+        ];
+
+        var slides4 = [
+            "image/book/dreamb/1.jpg", "image/book/dreamb/2.jpg", "image/book/dreamb/3.jpg",  "image/book/dreamb/4.jpg"
         ];
 
         var currentSlides, slideIndex;
