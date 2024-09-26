@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR tree</title>
+    <link rel="icon" type="image/svg+xml" href="image/yqlogo.svg">
+
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #1d1d1d;
+        overflow-x: hidden;
+    }
+
+    a, p, h1, h2, h3, h4, h5, h6, div, span, ul, ol, li {
+        color: white; 
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2.1%;
+        padding-right: 2.1%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: transparent;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        font-size: smaller;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 5px;
+    }
+
+
+    .navbar a:hover {
+        color: none;
+    }
+
+    .content {
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .content h5 {
+        font-size: 1em;
+        display: inline-block;
+        transform-origin: left;
+        margin-right: 5px;
+    }
+
+    .content a {
+        text-decoration: none;
+    }
+
+    .main-content {
+        background-color: #1d1d1d;
+        /* width: 100%; */
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .sidebar .row {
+        display: flex;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .sidebar .col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        height: 2.3vh;
+        margin-bottom: 0px;
+        margin: 0px;
+    }
+
+    .sidebar a:hover {
+        text-decoration: none;
+    }
+
+    .sidebar p {
+        margin: 0px;
+        height: 2.3vh;
+    }
+    .imgblock{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2%;
+        justify-content: space-between;
+    align-items: flex-end;
+
+    }
+
+    .image-container {
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    margin-bottom: 2%;
+    width: 49%;
+}
+.image-container :hover {
+    opacity: 0.8;
+}
+
+.image-container img{
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    margin: 0;
+}
+
+
+.image-container p {
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 3px;
+    margin-bottom: 5%;
+    font-size: 2%;
+}
+
+.container, .container p, .container a {
+    font-size: 80%;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.section p {
+    font-size: 40%;
+    font-weight: 500;
+}
+
+.sidebar .row .col {
+    padding-left: 0%;
+}
+
+.sidebar .row .col:nth-child(2) {
+    flex: 0 0 16%;
+    padding-left: 31%;
+}
+
+.sidebar .row .col:nth-child(3) {
+    padding-bottom: 20px;
+}
+
+.sidebar .col > a[href="imprint.html"] {
+    margin-top: 20px;
+}
+
+.extra-links {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.extra-links a {
+    /* font-size: 90%; */
+    margin: 2px 0;
+    color: gray;
+}
+
+.section a {
+    font-size: 270%;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.intro, .info {
+    display: flex;
+    padding-top: 0;
+    align-items: flex-start; /* Ensures top alignment */
+}
+
+.info {
+    margin-bottom: 150px;
+}
+
+.details, .paper {
+    width: 50%; /* Set initial width for larger screens */
+}
+
+.text {
+    width: 100%;
+}
+
+.about {
+    margin-left: 1%;
+    width: 104%;
+}
+
+.text {
+    overflow: hidden; /* Handles overflow */
+}
+
+.back-to-top {
+    display: block;
+    text-align: center;
+    margin-bottom: 80px;
+    color: grey;
+    text-decoration: none;
+    font-size: .8em;
+    width: 100%;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.audio-container {
+    width: 90%;  /* 增加音频条的宽度 */
+    background-color: transparent;  /* 设置背景透明 */
+    padding: 20px 0;  /* 保持顶部和底部的内边距 */
+    margin: 0 auto;  /* 居中音频条 */
+    display: block;  /* 确保容器是块级元素，以便正确应用宽度和居中 */
+}
+
+audio {
+    width: 100%;  /* 使音频控件填满容器 */
+    display: block;  /* 确保音频控件是块级元素，以便填满容器 */
+    
+}
+
+@media (max-width: 768px) {
+    .imgblock {
+        display: flex;
+        flex-direction: column;
+    }
+    .section p {
+        font-size: 2.5vw;
+        font-weight: 500;
+    }
+    .section d {
+        font-size: 2.5vw;
+    }
+    .intro {
+        width: 100%;
+    }
+    .details, .paper {
+        width: 50%; /* Adjust width for larger screens */
+    }
+    .info {
+        flex-direction: column; /* Stacks .paper and .text vertically */
+        align-items: flex-start; /* Aligns items to the left */
+    }
+    .details {
+        width: 50%; /* Full width for each on smaller screens */
+        margin-left: 0;
+    }
+    .about {
+        width: 100%;
+        margin-left: 0;
+    }
+    .sidebar .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .section {
+        padding-top: 6%;
+    }
+    .lightbox-content {
+        width: 80%; /* Increase width for smaller screens */
+    }
+    .prev, .next {
+        color: transparent;
+    }
+    .image-text-block {
+        width: 100%;
+        margin: 0;
+    }
+
+    .sidebar .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sidebar .row .col {
+        padding-left: 0;
+        margin-left: 0;
+        padding-bottom: 5%;
+    }
+    .main-content .row {
+        flex-direction: column;
+        margin-left: 0;
+    }
+    .footer-content .col {
+        margin: 0;
+        padding: 0;
+    }
+    .sidebar .col a[href='project.html'],
+    .sidebar .col a[href='publications.html'],
+    .sidebar .col a[href='about.html'],
+    .sidebar .col a[href='contact.html'] {
+        display: none;
+    }
+
+.container p{
+    margin-left: 0px;
+}
+.container, .container p, .container a {
+    font-size: 80%;
+    
+    font-weight: bold;
+}
+    .sidebar .row .col:nth-child(2) {
+        padding-left: 0;
+        padding-bottom: 0%;
+        margin-left: -10px;
+    }
+    .sidebar .row .col:nth-child(3) {
+        margin-left: -10px;
+    }
+    .content {
+        /* padding-left: 1%; */
+        /* padding-right: 1%; */
+    }
+    .image-container {
+        /* padding-left: 7px; */
+        /* padding-right: 7px; */
+        margin-bottom: 15px;
+    }
+
+    .extra-links {
+        /* padding-right: 10px; */
+        margin-bottom: -20px;
+        margin-top: -5%;
+    }
+    .image-container p, .navbar a, .sidebar a, .sidebar p, .container p, .extra-links a {
+        font-size: 2.5vw;
+    }
+    .section a {
+        font-size: 8.5vw;
+    }
+        .lightbox-content.landscape {
+    /* width: auto; */
+    /* height: 104%; */
+    max-width: 94%;
+}
+</style>
+<body>
+    <a id="top"></a>
+    <div class="navbar">
+        <a href="index.html">Quan Yuan</a>
+
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+    <div class="content">
+        <!-- 链接部分 -->
+        <div class="extra-links">
+            <div><a href="QR2.html">Drowning on the road</a></div>
+        </div>
+        <div class="extra-links">
+            <div><a href="QR3.html">Operating room</a></div>
+        </div>
+        
+        <!-- Section for Operating room -->
+        <div class="section">
+            <a>Coming to the tree</a>
+        </div>
+
+        <!-- Audio container moved under "Operating room" -->
+        <div class="audio-container">
+            <audio controls>
+                <source src="audio/QR1.mp3" type="audio/mp3">
+            </audio>
+        </div>
+
+                    <div class="text">
+                       <p style="padding-bottom: 20px;">I was cursed. My forehead had been branded with a scalding hot spoon, leaving behind white letters written in a language I didn’t understand. When I looked in the mirror, the letters were scrunched together.</p>
+                        <p style="padding-bottom: 20px;">I sought online help to see if someone could translate or get rid of the message. A comment under my post advised me to drink as much noodle soup as possible at a party, and then place a note on a tree describing the curse. He said that the curse could only be lifted by visiting this tree on a rainy day, in the hope that a local Taoist priest or medium would find the note, take pity on me, and help.</p>
+                        <p style="padding-bottom: 20px;">When I went to attach the note, a nearby man asked me if I knew how to break the curse. I told him I did, and soon a crowd gathered around us. I shared the method of breaking the curse with them, but I forgot to mention that you needed to return to the tree only on a rainy day. Later, I heard that the man's son had fallen victim to the same curse and was lying in a hospital, his condition worsening. Eventually the man decided to end his son's treatment, declaring that it was doing no good. This caused his wife to lose her sanity, and she insisted that her son was still alive inside her, even eating meals as if he were in her womb.</p>
+                        <!-- More paragraphs can be added as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <div class="container">
+        <a href="#top" class="back-to-top">Back to top</a>
+        <div style="display: flex; align-items: flex-start; margin-bottom: -10px;">
+            <p>Quan Yuan Photographer </p>
+        </div>
+        <div class="sidebar">
+            <div class="row">
+                <div class="col" style="padding-top: 10px;">
+                    <p>q@yqstudios.com</p>
+                    <p>New York, NY</p>
+                </div>
+                <div class="col">
+                    <a href="mailto:q@yqstudios.com">Email</a>
+                    <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
+                    <a href="https://www.linkedin.com/in/quanyuan/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="col">
+                    <a href="project.html">Project →</a>
+                    <a href="publications.html">Publications →</a>
+                    <a href="about.html">About →</a>
+                    <a href="contact.html">Contact →</a>
+                    <a href="imprint.html">All rights reserved by Quan Yuan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
