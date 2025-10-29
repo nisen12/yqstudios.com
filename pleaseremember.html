@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quan Yuan - Please Remember</title>
+    <title>Quan Yuan - portrait</title>
     <link rel="icon" type="image/svg+xml" href="image/yqlogo.svg">
     
-    <meta name="description" content="Quan Yuan's photography project: Please Remember, 2024">
-    <meta name="keywords" content="Quan Yuan, photography, Please Remember, art, exhibition">
+    <meta name="description" content="Quan Yuan's photography project: Portrait">
+    <meta name="keywords" content="Quan Yuan, photography, Portrait, art, exhibition">
 </head>
 <style>
     html, body {
@@ -46,6 +46,7 @@
         margin: 0 5px;
     }
 
+
     .navbar a:hover {
         color: none;
     }
@@ -57,6 +58,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+            padding-bottom: 150px;
     }
 
     .content h5 {
@@ -117,17 +119,24 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2%;
+    justify-content: flex-start;
+
 }
 
-
-.image-container img {
-    width: 15%;
+.image-container img.vertical {
+    width: 23.5%;
     height: auto;
     object-fit: cover;
     cursor: pointer;
     margin-bottom: 2%;
 }
 
+.image-container img.landscape {
+    width: 49%; /* 横向照片占一整行 */
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
 
 .lightbox-content {
     margin: 0;
@@ -290,13 +299,14 @@
     font-size: .8em;
     width: 100%;
 }
+body.no-scroll {
+    overflow: hidden;
+}
+
 
 h1 {
     font-size: 3em;
     margin-bottom: 0.5em;
-}
-body.no-scroll {
-    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -404,6 +414,11 @@ body.no-scroll {
     .section a {
         font-size: 8.5vw;
     }
+        .lightbox-content.landscape {
+    /* width: auto; */
+    /* height: 104%; */
+    max-width: 94%;
+}
 }
 </style>
 <body>
@@ -420,156 +435,55 @@ body.no-scroll {
     <div class="main-content">
         <div class="content">
             <div class="extra-links">
-                <a href="paperdream.html">← Previous</a>
-                <a href="paperworks_2.html">Next →</a>
+                <a href="still_life.html">← Previous</a>
+                <a href="documentary.html">Next →</a>
             </div>
-            <p style="width: 100%; margin-top: 20px; font-size:25px; font-weight: 70;">Please Remember</p>
+            <p style="width: 100%; margin-top: 20px; font-size: 25px; font-weight: 70;">Portrait</p>
             <div class="image-container">
-        <img src="image/pleaseremember/PleaseRemember01.jpg" alt="Image 1" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember02.jpg" alt="Image 2" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember03.jpg" alt="Image 3" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember04.jpg" alt="Image 4" class="image-container-img">
+                <img src="image/portrait/work24.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work21.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work20.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work22.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work23.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work03.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work04.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work05.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work06.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work07.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work08.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work09.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work10.jpg" alt="Image 3" class="image-container-img vertical">
+                <img src="image/portrait/work11.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work12.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work13.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work14.jpg" alt="Image 4" class="image-container-img landscape">
+                <img src="image/portrait/work15.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work16.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work17.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work18.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work19.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work25.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work26.jpg" alt="Image 4" class="image-container-img vertical">
 
-    
-        <img src="image/pleaseremember/PleaseRemember05.jpg" alt="Image 5" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember06.jpg" alt="Image 6" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember07.jpg" alt="Image 7" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember08.jpg" alt="Image 8" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember09.jpg" alt="Image 9" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember010.jpg" alt="Image 10" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember011.jpg" alt="Image 11" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember012.jpg" alt="Image 12" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember013.jpg" alt="Image 13" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember014.jpg" alt="Image 14" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember015.jpg" alt="Image 15" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember016.jpg" alt="Image 16" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember017.jpg" alt="Image 17" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember018.png" alt="Image 18" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember019.jpg" alt="Image 19" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember020.jpg" alt="Image 20" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember021.jpg" alt="Image 21" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember022.jpg" alt="Image 22" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember023.jpg" alt="Image 23" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember024.jpg" alt="Image 24" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember025.jpg" alt="Image 25" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember026.jpg" alt="Image 26" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember027.jpg" alt="Image 27" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember028.jpg" alt="Image 28" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember029.jpg" alt="Image 29" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember030.jpg" alt="Image 30" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember031.jpg" alt="Image 31" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember032.jpg" alt="Image 32" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember033.png" alt="Image 33" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember034.png" alt="Image 34" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember035.png" alt="Image 35" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember036.jpg" alt="Image 36" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember037.jpg" alt="Image 37" class="image-container-img">
-        
-    
-        <img src="image/pleaseremember/PleaseRemember038.jpg" alt="Image 38" class="image-container-img">
-        
 
-</div>
-
-            <!-- Inserted section starts here -->
-            <div class="section">
-                <a>Please Remember</a>
-                <div class="intro">
-                    <div class="details">
-                        <d>Details & Material</d>
-                        <hr style="border: 0; border-top: 1px solid white; margin-bottom: 25px;">
-                    </div>
-                    <div class="about">
-                        <d>About</d>
-                        <hr style="border: 0; border-top: 1px solid white; margin-bottom: 25px;">
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="paper">
-                        <p>2022</p>
-                        <p>3.5in x 5.5in</p>
-                        <p>RC Deluxe photographic paper</p>
-                    </div>
-                    <div class="text">
-                        <p style="padding-bottom: 20px;">The randomness of each image intrigues me to explore this uncontrollable art. From waiting for the Lumi print paper to surprise me, to burning the print paper and controlling the result myself, I began by tasting the joy of making Lumi prints by exploring the uncontrollable.</p>
-                        <p style="padding-bottom: 20px;">I consider this series of works a spiritual journey inspired by my comfort zone—my hometown, where I also picked all the subjects. The pandemic caused a 3-year shutdown across the country, and school stressed me out as well. The cities, the schools, and even photos are like cells from which every soul trapped within cries out for liberation. Recently, the final moment for breaking free has arrived, and the sudden release of the policy brings happiness along with pain. Since I was young, playing with fire was strictly forbidden, so burning represents a rebellion against the restrictions and routines of normal life. Burning is like releasing the soul from the photo; it frees my emotions by destroying the abstract cage. But the key is not to destroy, but to rebel and make things reborn. Those uncertain burning marks have a close association with the unsure mental world, and they mark the beauty of burning freely, expressing itself without restrictions. The vibrancy in the flames and these new, beautiful patterns brought about by the destruction are like a forest regrowing saplings after a fire, which is exactly what the Chinese people, at this moment, are expecting. After the destruction and the pain, we will reap the beauty of life. The unexpected result of each image made from the fire is the vent of my pain, as well as a symbol of the outbreak of mental power in every despairing soul.</p>
-                        <p style="padding-bottom: 20px;">Lumi print also helped me discover how to balance the proportion of photography and painting in my works. There is a blurry line between these two art forms, which is defined by spectators but not us, the artists. The core of photography is revealing the truth, but the massive Photoshop editing in my works twists the line between photography and drawing. Baudelaire once opposed photography as a precise reproduction of nature and an enemy of painting (Baudelaire, 1859). But photography ultimately did not replace painting; instead, it liberated painting from copying nature to a higher level of abstraction. Moreover, Susan Sontag considered pressing the shutter as a power to freeze nature and capture the moment. But at this point, we can see that photography does not need to replicate nature or even press the shutter. The boundaries between photography and painting are further blurred, and human creativity, abstraction, and randomness combine in this work, giving the author more space for expression and making the work more open to interpretation. That is to say, it is an artificially processed, unnatural photographic work, divorced from photography's generally perceived duty to restore nature and truth, but at the same time, it is not an artificially generated, manipulated product, because its patterns are random and uncontrollable. This creates tension between the artificial and the natural, making it a man-made but not artificial work of photography.</p>
-                        <p style="padding-bottom: 20px;">Color always comes first in our eyes when we see something. In this work, the color adjustment gives it a new identity. This is a series of interactive images, and the colors and shapes are the languages to communicate with my viewers. This is not only a visual communication but also a metaphor for the viewer's inner world. These blurred, random, flowing shapes and colors are like what psychoanalysis calls archetypes, which leave blurred imprints on the substratum, just as events or even traumas in life leave imprints on people at an unconscious level. Depending on the individual experience of the viewer, they can be interpreted and seen as various other objects, which are abstract, imaginary, and uncanny, just as archetypes can be revealed in dreams, fantasies, and mental illnesses.</p>
-                        <!-- More paragraphs can be added as needed -->
-                    </div>
-                </div>
+                <img src="image/portrait/work01.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/work02.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin01.jpg" alt="Image 1" class="image-container-img vertical">
+                <img src="image/portrait/twin02.jpg" alt="Image 1" class="image-container-img vertical">
+                <img src="image/portrait/twin03.jpg" alt="Image 2" class="image-container-img landscape">
+                <img src="image/portrait/twin04.jpg" alt="Image 3" class="image-container-img vertical">
+                <img src="image/portrait/twin05.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin07.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin09.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin08.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin06.jpg" alt="Image 4" class="image-container-img landscape">
+                <img src="image/portrait/twin10.jpg" alt="Image 3" class="image-container-img vertical">
+                <img src="image/portrait/twin11.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin15.jpg" alt="Image 4" class="image-container-img vertical">
+                <img src="image/portrait/twin14.jpg" alt="Image 4" class="image-container-img landscape">
             </div>
-        </div>
+
+            
     </div>
 
     <!-- Footer section -->
@@ -601,7 +515,7 @@ body.no-scroll {
     </div>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
+  <div id="lightbox" class="lightbox">
         <span class="close">&times;</span>
         <img class="lightbox-content">
         <a class="prev">&#10094;</a>
@@ -609,7 +523,7 @@ body.no-scroll {
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     let modal = document.getElementById('lightbox');
     let images = document.getElementsByClassName('image-container-img');
     let modalImg = document.querySelector('.lightbox-content');
@@ -634,6 +548,7 @@ body.no-scroll {
         }
     }
 
+
     closeBtn.onclick = function() {
         modal.style.display = "none";
         document.body.classList.remove('no-scroll'); // 恢复页面滚动
@@ -642,8 +557,9 @@ body.no-scroll {
     // 点击图片关闭lightbox
     modalImg.onclick = function() {
         modal.style.display = "none";
-        document.body.classList.remove('no-scroll'); // 恢复页面滚动
-    }
+            document.body.classList.remove('no-scroll'); // 恢复页面滚动
+        }
+    
 
     function showImage(step) {
         currentIndex += step;
@@ -710,8 +626,9 @@ body.no-scroll {
     modalImg.classList.add('fade');
     setTimeout(() => modalImg.classList.remove('fade'), 300);
 
-});
+    // 平滑滚动到顶部
 
+});
 
     </script>
 </body>
