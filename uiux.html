@@ -1174,9 +1174,26 @@ a {
   .square-grid{
     margin-bottom: 0px;
   }
-
-
 }
+
+  /* 💻 仅在大屏幕上调整 horizontal-scroll-section 图片大小 */
+@media (min-width: 1200px) {
+  .horizontal-item {
+    flex: 0 0 520px;   /* ✅ 每张卡片宽度变大（原可能是 420px） */
+    height: auto;      /* ✅ 高度自适应 */
+  }
+
+  .horizontal-scroll-section {
+    height: 100vh;      /* ✅ 让整体区域略高 */
+  }
+
+  .horizontal-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
 
 
 
