@@ -2249,63 +2249,92 @@ window.addEventListener("load", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".horizontal-scroll-container");
   const items = document.querySelectorAll(".horizontal-item");
-
   if (!container || !items.length) return;
 
-  // --- 1️⃣ 手机端强制单张滑动 ---
   let startX = 0;
-  let currentScrollLeft = 0;
+  let scrollStart = 0;
   let isDragging = false;
+  let lastTouchTime = 0;
 
+  // 手指按下
   container.addEventListener("touchstart", (e) => {
     isDragging = true;
     startX = e.touches[0].pageX;
-    currentScrollLeft = container.scrollLeft;
+    scrollStart = container.scrollLeft;
+    lastTouchTime = Date.now();
   });
 
+  // 手指移动
   container.addEventListener("touchmove", (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const dx = e.touches[0].pageX - startX;
-    container.scrollLeft = currentScrollLeft - dx;
+    container.scrollLeft = scrollStart - dx;
   });
 
+  // 手指松开
   container.addEventListener("touchend", (e) => {
+    if (!isDragging) return;
     isDragging = false;
+    const diff = e.changedTouches[0].pageX - startX;
+    const elapsed = Date.now() - lastTouchTime;
+
+    // 根据滑动速度和距离决定下一张还是上一张
+    const threshold = 50; // 最小滑动距离
+    const fastSwipe = elapsed < 300; // 快速滑动时放宽判断
+
+    let direction = 0;
+    if (diff < -threshold || (fastSwipe && diff < -20)) direction = 1; // 下一张
+    else if (diff > threshold || (fastSwipe && diff > 20)) direction = -1; // 上一张
+
+    scrollToClosest(direction);
+  });
+
+  // 自动对齐到最近的图片
+  function scrollToClosest(direction = 0) {
     const containerRect = container.getBoundingClientRect();
     const center = containerRect.left + containerRect.width / 2;
     let closest = null;
     let minDist = Infinity;
+    let closestIndex = -1;
 
-    items.forEach((item) => {
+    items.forEach((item, i) => {
       const rect = item.getBoundingClientRect();
       const itemCenter = rect.left + rect.width / 2;
       const dist = Math.abs(center - itemCenter);
       if (dist < minDist) {
         minDist = dist;
         closest = item;
+        closestIndex = i;
       }
     });
 
-    // 自动对齐到最近的图片
+    if (direction !== 0) {
+      const newIndex = Math.min(
+        items.length - 1,
+        Math.max(0, closestIndex + direction)
+      );
+      closest = items[newIndex];
+    }
+
     if (closest) {
       const scrollLeft =
         closest.offsetLeft - (container.offsetWidth - closest.offsetWidth) / 2;
       container.scrollTo({ left: scrollLeft, behavior: "smooth" });
     }
-  });
+  }
 
-  // --- 2️⃣ 居中图片自动放大 ---
+  // 居中自动放大
   function updateScale() {
-    const containerRect = container.getBoundingClientRect();
-    const center = containerRect.left + containerRect.width / 2;
+    const rect = container.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
     items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenter = rect.left + rect.width / 2;
+      const itemRect = item.getBoundingClientRect();
+      const itemCenter = itemRect.left + itemRect.width / 2;
       const distance = Math.abs(center - itemCenter);
-      const scale = Math.max(0.9, 1 - distance / (containerRect.width * 0.8));
+      const scale = Math.max(0.9, 1 - distance / (rect.width * 0.8));
       item.style.transform = `scale(${scale})`;
-      item.style.transition = "transform 0.3s ease";
+      item.style.transition = "transform 0.25s ease-out";
     });
     requestAnimationFrame(updateScale);
   }
@@ -2313,8 +2342,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateScale();
 });
 </script>
-
-
 
 </body>
 </html>
