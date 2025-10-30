@@ -1000,27 +1000,19 @@ a {
     margin-bottom: 20px;
     margin-top: 0px;
   }
-  .horizontal-scroll-content{
-    gap: 0 !important;            /* ✅ 彻底移除卡片间距 */
-    margin: 0 !important;
-  }
+  .horizontal-scroll-content { gap: 0; }
 
   /* 防止多卡片部分露出，确保只滑动一张 */
   .horizontal-scroll-container {
-    display: flex;
-    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-
+    overscroll-behavior-x: contain; /* 防误触边缘回弹 */
   }
 
   .horizontal-item {
-    flex: 0 0 94vw;             /* 每张卡片占满屏幕 */
-    scroll-snap-align: center;  /* 每次滑动居中停靠 */
-    transition: transform 0.05s ease, opacity 0.05s ease;
-    transform: scale(0.9);
-    opacity: 0.7;
-    margin: 0 !important; 
+    flex: 0 0 94vw;     /* 一屏一张（两边留一点点安全边距）*/
+    scroll-snap-align: center;
+    will-change: transform;
   }
 
   .horizontal-item.active {
@@ -2093,14 +2085,6 @@ if (horizContainer && horizContent) {
     let horizStartX = 0;
     let horizIsDragging = false;
 
-    horizContainer.addEventListener('mousedown', startDrag);
-    horizContainer.addEventListener('touchstart', startDrag, {passive: true});
-    horizContainer.addEventListener('mousemove', drag);
-    horizContainer.addEventListener('touchmove', drag, {passive: false});
-    horizContainer.addEventListener('mouseup', endDrag);
-    horizContainer.addEventListener('touchend', endDrag);
-    horizContainer.addEventListener('mouseleave', endDrag);
-
     function startDrag(e) {
         if (horizIsAnimating) return;
         horizIsDragging = true;
@@ -2108,10 +2092,17 @@ if (horizContainer && horizContent) {
         horizContainer.style.scrollBehavior = 'auto';
     }
     function drag(e) {
-        if (!horizIsDragging) return;
-        // prevent vertical scrolling while dragging horizontally on touch
-        if (e.cancelable) e.preventDefault();
-    }
+  if (!horizIsDragging) return;
+
+  const touch = e.touches ? e.touches[0] : e;
+  const dx = (horizStartX || 0) - touch.pageX;
+
+  // 仅在水平滑动明显时阻止默认行为（保留上下滑动）
+  if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(e.touches?.[0]?.clientY || 0)) {
+    e.preventDefault();
+  }
+}
+
     function endDrag(e) {
         if (!horizIsDragging) return;
         horizIsDragging = false;
@@ -2246,67 +2237,147 @@ window.addEventListener("load", () => {
 });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const horizContainer = document.querySelector(".horizontal-scroll-container");
-  const allItems = document.querySelectorAll(".horizontal-item");
+(function () {
+  const container = document.querySelector(".horizontal-scroll-container");
+  const items = document.querySelectorAll(".horizontal-item");
+  if (!container || !items.length) return;
 
-  if (!horizContainer || !allItems.length) return;
+  // —— 参数可按需微调 ——
+  const swipeThreshold = 40;   // 触发翻页的最小水平位移(px)
+  const angleGuard = 1.3;      // 水平/垂直方向比值阈值，越大越不容易误判为水平滑动
+  const pageDuration = 250;    // 翻页滚动动画时长(ms)
 
-  let scrollTimeout;
+  let startX = 0, startY = 0, isTouching = false, isPaging = false;
+  let rafId = null, scrollEndTimer = null;
 
-  // 每次滚动时根据中间位置更新放大状态
-  horizContainer.addEventListener("scroll", () => {
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    updateCarouselState(); // 实时更新缩放状态
-    scrollTimeout = setTimeout(() => snapToCenter(), 80); // 停止后吸附到中间
+  // 居中放大（滚动时实时执行）
+  function updateScale() {
+    const rect = container.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+
+    items.forEach((item) => {
+      const r = item.getBoundingClientRect();
+      const mid = r.left + r.width / 2;
+      const dist = Math.abs(center - mid);
+      const scale = Math.max(0.9, 1 - dist / (rect.width * 0.8));
+      item.style.transform = `scale(${scale})`;
+      item.style.opacity = scale > 0.97 ? 1 : 0.8;
+      item.style.transition = "transform 0.18s ease-out, opacity 0.18s ease-out";
+    });
+  }
+
+  function onScroll() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(updateScale);
+
+    // 停止滚动后吸附到最近一张
+    if (scrollEndTimer) clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(snapToNearest, 80);
+  }
+
+  container.addEventListener("scroll", onScroll, { passive: true });
+
+  // 点击某张，平滑滚动到中间
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      centerTo(item);
+    });
   });
 
-  // 自动放大居中的图片
-  function updateCarouselState() {
-    const rect = horizContainer.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-
-    allItems.forEach((item) => {
-      const itemRect = item.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2;
-      const distance = Math.abs(center - itemCenter);
-
-      // 距离中心越近，scale 越大
-      const scale = Math.max(0.9, 1 - distance / (rect.width * 0.8));
-      item.style.transform = `scale(${scale})`;
-      item.style.transition = "transform 0.25s ease-out";
-      item.style.opacity = scale > 0.95 ? 1 : 0.7;
-    });
+  function centerTo(item) {
+    if (!item) return;
+    const target =
+      item.offsetLeft - (container.clientWidth - item.offsetWidth) / 2;
+    smoothScrollTo(target, pageDuration);
   }
 
-  // 停止滚动后自动对齐最近的卡片
-  function snapToCenter() {
-    const rect = horizContainer.getBoundingClientRect();
+  function snapToNearest() {
+    if (isPaging) return;
+    const rect = container.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
-    let closest = null;
-    let minDist = Infinity;
+    let best = null, minDist = Infinity;
 
-    allItems.forEach((item) => {
-      const itemRect = item.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2;
-      const dist = Math.abs(center - itemCenter);
-      if (dist < minDist) {
-        minDist = dist;
-        closest = item;
+    items.forEach((item) => {
+      const r = item.getBoundingClientRect();
+      const mid = r.left + r.width / 2;
+      const d = Math.abs(center - mid);
+      if (d < minDist) { minDist = d; best = item; }
+    });
+
+    centerTo(best);
+  }
+
+  function smoothScrollTo(x, duration) {
+    isPaging = true;
+    const start = container.scrollLeft;
+    const dx = x - start;
+    const t0 = performance.now();
+
+    function step(t) {
+      const p = Math.min(1, (t - t0) / duration);
+      // easeOutCubic
+      const e = 1 - Math.pow(1 - p, 3);
+      container.scrollLeft = start + dx * e;
+      if (p < 1) requestAnimationFrame(step);
+      else {
+        isPaging = false;
+        updateScale();
       }
-    });
-
-    if (closest) {
-      const scrollLeft =
-        closest.offsetLeft - (horizContainer.offsetWidth - closest.offsetWidth) / 2;
-      horizContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
     }
+    requestAnimationFrame(step);
   }
 
-  // 初始化状态
-  updateCarouselState();
-});
+  // 轻量级“仅在明显水平滑动时翻一页”，不阻断垂直滚动
+  container.addEventListener("touchstart", (e) => {
+    if (isPaging) return;
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    isTouching = true;
+  }, { passive: true });
+
+  container.addEventListener("touchend", (e) => {
+    if (!isTouching || isPaging) return;
+    isTouching = false;
+
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+
+    // 垂直手势或位移不够 → 交给浏览器，保持上下滚动流畅
+    if (Math.abs(dx) < swipeThreshold || Math.abs(dx) < Math.abs(dy) * angleGuard) {
+      snapToNearest(); // 手势结束后仍吸附一下
+      return;
+    }
+
+    // 水平明确翻一页（只 ±1）
+    const dir = dx < 0 ? 1 : -1;
+    const target = pickNeighbor(dir);
+    centerTo(target);
+  }, { passive: true });
+
+  // 选择当前最近一张的左右邻居各一张
+  function pickNeighbor(dir) {
+    const rect = container.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    let closestIndex = 0, minDist = Infinity;
+
+    items.forEach((item, i) => {
+      const r = item.getBoundingClientRect();
+      const mid = r.left + r.width / 2;
+      const d = Math.abs(center - mid);
+      if (d < minDist) { minDist = d; closestIndex = i; }
+    });
+
+    const nextIndex = Math.max(0, Math.min(items.length - 1, closestIndex + dir));
+    return items[nextIndex];
+  }
+
+  // 初始状态
+  updateScale();
+})();
 </script>
+
 
 </body>
 </html>
