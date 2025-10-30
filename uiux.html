@@ -2251,20 +2251,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const items = document.querySelectorAll(".horizontal-item");
   if (!container || !items.length) return;
 
+  let isDragging = false;
   let startX = 0;
   let scrollStart = 0;
-  let isDragging = false;
-  let lastTouchTime = 0;
+  let scrollTimeout = null;
+  let currentIndex = 0;
 
-  // 手指按下
+  /* --- 拖动事件 --- */
   container.addEventListener("touchstart", (e) => {
     isDragging = true;
     startX = e.touches[0].pageX;
     scrollStart = container.scrollLeft;
-    lastTouchTime = Date.now();
+    if (scrollTimeout) clearTimeout(scrollTimeout);
   });
 
-  // 手指移动
   container.addEventListener("touchmove", (e) => {
     if (!isDragging) return;
     e.preventDefault();
@@ -2272,31 +2272,27 @@ document.addEventListener("DOMContentLoaded", () => {
     container.scrollLeft = scrollStart - dx;
   });
 
-  // 手指松开
   container.addEventListener("touchend", (e) => {
-    if (!isDragging) return;
     isDragging = false;
-    const diff = e.changedTouches[0].pageX - startX;
-    const elapsed = Date.now() - lastTouchTime;
-
-    // 根据滑动速度和距离决定下一张还是上一张
-    const threshold = 50; // 最小滑动距离
-    const fastSwipe = elapsed < 300; // 快速滑动时放宽判断
-
-    let direction = 0;
-    if (diff < -threshold || (fastSwipe && diff < -20)) direction = 1; // 下一张
-    else if (diff > threshold || (fastSwipe && diff > 20)) direction = -1; // 上一张
-
-    scrollToClosest(direction);
+    snapToClosest();
   });
 
-  // 自动对齐到最近的图片
-  function scrollToClosest(direction = 0) {
+  /* --- 滚动实时更新缩放 --- */
+  container.addEventListener("scroll", () => {
+    updateScale();
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (!isDragging) snapToClosest();
+    }, 80); // 停止滚动后立即吸附
+  });
+
+  /* --- 对齐到最近的卡片 --- */
+  function snapToClosest() {
     const containerRect = container.getBoundingClientRect();
     const center = containerRect.left + containerRect.width / 2;
     let closest = null;
     let minDist = Infinity;
-    let closestIndex = -1;
+    let closestIndex = 0;
 
     items.forEach((item, i) => {
       const rect = item.getBoundingClientRect();
@@ -2309,34 +2305,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (direction !== 0) {
-      const newIndex = Math.min(
-        items.length - 1,
-        Math.max(0, closestIndex + direction)
-      );
-      closest = items[newIndex];
-    }
-
     if (closest) {
+      currentIndex = closestIndex;
       const scrollLeft =
         closest.offsetLeft - (container.offsetWidth - closest.offsetWidth) / 2;
       container.scrollTo({ left: scrollLeft, behavior: "smooth" });
     }
   }
 
-  // 居中自动放大
+  /* --- 自动放大居中的卡片 --- */
   function updateScale() {
     const rect = container.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
-    items.forEach((item) => {
+    items.forEach((item, index) => {
       const itemRect = item.getBoundingClientRect();
       const itemCenter = itemRect.left + itemRect.width / 2;
       const distance = Math.abs(center - itemCenter);
-      const scale = Math.max(0.9, 1 - distance / (rect.width * 0.8));
+      // 距离越近，放大越明显
+      const scale = Math.max(0.85, 1 - distance / (rect.width * 0.8));
       item.style.transform = `scale(${scale})`;
-      item.style.transition = "transform 0.25s ease-out";
+      item.style.transition = "transform 0.2s ease-out";
+      item.style.opacity = scale > 0.95 ? 1 : 0.8;
     });
-    requestAnimationFrame(updateScale);
   }
 
   updateScale();
