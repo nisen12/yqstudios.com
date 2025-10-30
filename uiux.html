@@ -2247,89 +2247,64 @@ window.addEventListener("load", () => {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".horizontal-scroll-container");
-  const items = document.querySelectorAll(".horizontal-item");
-  if (!container || !items.length) return;
+  const horizContainer = document.querySelector(".horizontal-scroll-container");
+  const allItems = document.querySelectorAll(".horizontal-item");
 
-  let isDragging = false;
-  let startX = 0;
-  let scrollStart = 0;
-  let scrollTimeout = null;
-  let currentIndex = 0;
+  if (!horizContainer || !allItems.length) return;
 
-  /* --- 拖动事件 --- */
-  container.addEventListener("touchstart", (e) => {
-    isDragging = true;
-    startX = e.touches[0].pageX;
-    scrollStart = container.scrollLeft;
+  let scrollTimeout;
+
+  // 每次滚动时根据中间位置更新放大状态
+  horizContainer.addEventListener("scroll", () => {
     if (scrollTimeout) clearTimeout(scrollTimeout);
+    updateCarouselState(); // 实时更新缩放状态
+    scrollTimeout = setTimeout(() => snapToCenter(), 80); // 停止后吸附到中间
   });
 
-  container.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const dx = e.touches[0].pageX - startX;
-    container.scrollLeft = scrollStart - dx;
-  });
+  // 自动放大居中的图片
+  function updateCarouselState() {
+    const rect = horizContainer.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
 
-  container.addEventListener("touchend", (e) => {
-    isDragging = false;
-    snapToClosest();
-  });
+    allItems.forEach((item) => {
+      const itemRect = item.getBoundingClientRect();
+      const itemCenter = itemRect.left + itemRect.width / 2;
+      const distance = Math.abs(center - itemCenter);
 
-  /* --- 滚动实时更新缩放 --- */
-  container.addEventListener("scroll", () => {
-    updateScale();
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      if (!isDragging) snapToClosest();
-    }, 80); // 停止滚动后立即吸附
-  });
+      // 距离中心越近，scale 越大
+      const scale = Math.max(0.9, 1 - distance / (rect.width * 0.8));
+      item.style.transform = `scale(${scale})`;
+      item.style.transition = "transform 0.25s ease-out";
+      item.style.opacity = scale > 0.95 ? 1 : 0.7;
+    });
+  }
 
-  /* --- 对齐到最近的卡片 --- */
-  function snapToClosest() {
-    const containerRect = container.getBoundingClientRect();
-    const center = containerRect.left + containerRect.width / 2;
+  // 停止滚动后自动对齐最近的卡片
+  function snapToCenter() {
+    const rect = horizContainer.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
     let closest = null;
     let minDist = Infinity;
-    let closestIndex = 0;
 
-    items.forEach((item, i) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenter = rect.left + rect.width / 2;
+    allItems.forEach((item) => {
+      const itemRect = item.getBoundingClientRect();
+      const itemCenter = itemRect.left + itemRect.width / 2;
       const dist = Math.abs(center - itemCenter);
       if (dist < minDist) {
         minDist = dist;
         closest = item;
-        closestIndex = i;
       }
     });
 
     if (closest) {
-      currentIndex = closestIndex;
       const scrollLeft =
-        closest.offsetLeft - (container.offsetWidth - closest.offsetWidth) / 2;
-      container.scrollTo({ left: scrollLeft, behavior: "smooth" });
+        closest.offsetLeft - (horizContainer.offsetWidth - closest.offsetWidth) / 2;
+      horizContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
     }
   }
 
-  /* --- 自动放大居中的卡片 --- */
-  function updateScale() {
-    const rect = container.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-    items.forEach((item, index) => {
-      const itemRect = item.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2;
-      const distance = Math.abs(center - itemCenter);
-      // 距离越近，放大越明显
-      const scale = Math.max(0.85, 1 - distance / (rect.width * 0.8));
-      item.style.transform = `scale(${scale})`;
-      item.style.transition = "transform 0.2s ease-out";
-      item.style.opacity = scale > 0.95 ? 1 : 0.8;
-    });
-  }
-
-  updateScale();
+  // 初始化状态
+  updateCarouselState();
 });
 </script>
 
