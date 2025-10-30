@@ -2237,56 +2237,114 @@ window.addEventListener("load", () => {
 });
 </script>
 <script>
-// —— 手机端一次滑动翻一页（不吸附）
-(function() {
-  const container = document.querySelector(".horizontal-scroll-container");
-  const items = document.querySelectorAll(".horizontal-item");
-  if (!container || !items.length) return;
+let horizStartX = 0;
+let horizStartY = 0;
+let horizIsDragging = false;
+let lastMoveAt = 0;
+const DRAG_THRESHOLD = 15; // 判定为横向拖拽最小像素
+const FLICK_THRESHOLD = 60; // 判定快速滑动切换的最小像素
+const SCROLL_DEBOUNCE = 60; // ms，scroll 侦测延迟（尽量小以减少感知延迟）
 
-  let startX = 0;
-  let startY = 0;
-  let startScroll = 0;
-  const threshold = 50; // 滑动距离阈值
-  const ratio = 1.3;    // 判断水平滑动的阈值比例
+// pointerdown / pointermove / pointerup 统一处理（兼容触摸与鼠标）
+horizContainer.addEventListener('pointerdown', (e) => {
+  if (horizIsAnimating) return;
+  horizIsDragging = true;
+  horizStartX = e.clientX;
+  horizStartY = e.clientY;
+  horizContainer.setPointerCapture && horizContainer.setPointerCapture(e.pointerId);
+  horizContainer.style.scrollBehavior = 'auto';
+  lastMoveAt = performance.now();
+});
 
-  container.addEventListener("touchstart", (e) => {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    startScroll = container.scrollLeft;
-  }, { passive: true });
+horizContainer.addEventListener('pointermove', (e) => {
+  if (!horizIsDragging) return;
+  const dx = e.clientX - horizStartX;
+  const dy = e.clientY - horizStartY;
 
-  container.addEventListener("touchend", (e) => {
-    const t = e.changedTouches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
+  // 如果竖向移动明显大于横向移动，放行（让页面上下滚）
+  if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > DRAG_THRESHOLD) {
+    // 不阻止，用户想要上下滚动
+    return;
+  }
 
-    // 如果竖直方向更大，则允许上下滑动
-    if (Math.abs(dy) > Math.abs(dx) * ratio) return;
+  // 如果横向移动达到阈值，阻止默认滚动以开启横向滑动体验
+  if (Math.abs(dx) > DRAG_THRESHOLD) {
+    // 阻止默认避免页面横向 bounce（该事件非 passive，因此可以 preventDefault）
+    e.preventDefault && e.preventDefault();
+    // 手动滚动容器跟随手指
+    horizContainer.scrollLeft -= dx; // move opposite because scrollLeft increases to the right
+    // 更新起点为当前坐标以实现相对移动（更灵敏）
+    horizStartX = e.clientX;
+    horizStartY = e.clientY;
+    lastMoveAt = performance.now();
+  }
+}, { passive: false });
 
-    // 下一张 / 上一张
-    const itemWidth = items[0].offsetWidth;
-    if (Math.abs(dx) > threshold) {
-      if (dx < 0) container.scrollBy({ left: itemWidth, behavior: "smooth" });
-      else container.scrollBy({ left: -itemWidth, behavior: "smooth" });
-    }
-  }, { passive: true });
+horizContainer.addEventListener('pointerup', (e) => {
+  if (!horizIsDragging) return;
+  horizIsDragging = false;
+  horizContainer.releasePointerCapture && horizContainer.releasePointerCapture(e.pointerId);
+  horizContainer.style.scrollBehavior = 'smooth';
 
-  // 滚动时实时放大中间卡片
-  container.addEventListener("scroll", () => {
-    const rect = container.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-    items.forEach((item) => {
+  // 计算手指总位移（使用 up 前最后一次 coord 与上一次 start 的差值）
+  const dxTotal = horizStartX - e.clientX;
+  // 如果是快速 flick 且大于阈值，按方向切换一张；否则 snap 到最近
+  if (Math.abs(dxTotal) > FLICK_THRESHOLD) {
+    if (dxTotal > 0) navigateTo('next');
+    else navigateTo('prev');
+  } else {
+    // snap 到最近一张
+    updateCarouselState(); // 确保 active index 已计算
+    scrollToIndex(horizCurrentIndex);
+  }
+});
+
+// 兼容 pointer cancel / leave
+horizContainer.addEventListener('pointercancel', (e) => {
+  if (!horizIsDragging) return;
+  horizIsDragging = false;
+  horizContainer.style.scrollBehavior = 'smooth';
+  scrollToIndex(horizCurrentIndex);
+});
+
+horizContainer.addEventListener('mouseleave', (e) => {
+  // 鼠标离开时如果在拖拽也结束
+  if (horizIsDragging && e.pointerType === 'mouse') {
+    horizIsDragging = false;
+    horizContainer.style.scrollBehavior = 'smooth';
+    scrollToIndex(horizCurrentIndex);
+  }
+});
+
+// 更灵敏的 scroll -> 立刻更新 active（降低 debounce 时间）
+let scrollTicker = null;
+horizContainer.addEventListener('scroll', () => {
+  if (horizIsDragging || horizIsAnimating) return;
+  if (scrollTicker) cancelAnimationFrame(scrollTicker);
+  scrollTicker = requestAnimationFrame(() => {
+    updateCarouselState();
+  });
+});
+
+// 点击任意卡片立刻居中（保持你原先的点击逻辑，但把它放在 createCarouselItems 中，示例如下）
+function attachClickToItems() {
+  const allItems = horizContent.querySelectorAll('.horizontal-item');
+  allItems.forEach((item, idx) => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', (ev) => {
+      // 不在拖拽时响应点击（防止误触）
+      if (horizIsDragging) return;
+      // 计算真实索引（createCarouselItems 用了重复数组）
+      horizContainer.style.scrollBehavior = 'smooth';
+      const containerRect = horizContainer.getBoundingClientRect();
       const itemRect = item.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2;
-      const dist = Math.abs(center - itemCenter);
-      const scale = Math.max(0.9, 1 - dist / (rect.width * 0.8));
-      item.style.transform = `scale(${scale})`;
-      item.style.transition = "transform 0.2s ease-out";
-      item.style.opacity = scale > 0.96 ? 1 : 0.8;
+      const scrollLeft = item.offsetLeft - (containerRect.width - itemRect.width) / 2;
+      horizContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+      // 让 updateCarouselState 在动画后更新 active
+      setTimeout(updateCarouselState, 80);
     });
   });
-})();
+}
 </script>
 
 
