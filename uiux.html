@@ -2345,6 +2345,22 @@ function attachClickToItems() {
     });
   });
 }
+horizContainer.addEventListener("scroll", () => {
+  const items = horizContent.querySelectorAll(".horizontal-item");
+  const rect = horizContainer.getBoundingClientRect();
+  const center = rect.left + rect.width / 2;
+
+  items.forEach((item) => {
+    const itemRect = item.getBoundingClientRect();
+    const itemCenter = itemRect.left + itemRect.width / 2;
+    const distance = Math.abs(center - itemCenter);
+    const maxDist = rect.width / 2; // 超过一半宽度的距离视为最远
+    const scale = Math.max(0.85, 1 - distance / maxDist * 0.15); 
+    item.style.transform = `scale(${scale})`;
+    item.style.transition = "transform 0.15s ease-out";
+    item.style.opacity = scale > 0.95 ? 1 : 0.8;
+  });
+});
 </script>
 
 
