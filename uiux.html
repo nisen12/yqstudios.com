@@ -2361,6 +2361,31 @@ horizContainer.addEventListener("scroll", () => {
     item.style.opacity = scale > 0.95 ? 1 : 0.8;
   });
 });
+// ---- 点击左右图片即可切换 ----
+const allItems = document.querySelectorAll(".horizontal-item");
+allItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    const containerRect = horizContainer.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const itemCenter = itemRect.left + itemRect.width / 2;
+    const center = containerRect.left + containerRect.width / 2;
+
+    // 如果点击的是中间图，不操作
+    if (Math.abs(itemCenter - center) < 10) return;
+
+    // 判断点击左边还是右边
+    const direction = itemCenter < center ? -1 : 1;
+    const nextIndex = Math.min(allItems.length - 1, Math.max(0, index + direction));
+    const nextItem = allItems[nextIndex];
+
+    // 滚动到下一张
+    const scrollLeft =
+      nextItem.offsetLeft - (horizContainer.offsetWidth - nextItem.offsetWidth) / 2;
+
+    horizContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
+  });
+});
+
 </script>
 
 
