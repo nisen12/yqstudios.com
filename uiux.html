@@ -2237,6 +2237,30 @@ window.addEventListener("load", () => {
   setInterval(updateAllTimes, 1000);
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".horizontal-scroll-container");
+  const items = document.querySelectorAll(".horizontal-item");
+
+  if (!container || !items.length) return;
+
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+      const itemRect = item.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const scrollLeft =
+        container.scrollLeft +
+        (itemRect.left - containerRect.left) -
+        (container.clientWidth / 2 - itemRect.width / 2);
+
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth",
+      });
+    });
+  });
+});
+</script>
 
 
 </body>
