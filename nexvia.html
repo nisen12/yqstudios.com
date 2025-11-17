@@ -43,7 +43,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
         }
 
         .content-nav a {
@@ -87,13 +87,13 @@
         }
 
         .sidebar-name {
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
             font-weight: 500;
             color: #000000;
         }
 
         .sidebar-titles {
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
             color: #666666;
             margin-bottom: 20px;
             line-height: 1.4;
@@ -108,7 +108,7 @@
         }
 
         .sidebar-contact a {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
         }
 
         .works-section {
@@ -116,7 +116,7 @@
         }
 
         .works-header {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #000000;
             display: flex;
             align-items: center;
@@ -145,13 +145,13 @@
         }
 
         .category-title {
-            font-size: 0.9em;
+            font-size: clamp(13px, 0.9vw, 18px);
             margin-bottom: 4px;
             font-weight: 500;
         }
 
         .category-details {
-            font-size: 0.7em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #000000;
             margin-left: 0;
             font-weight: 300;
@@ -161,7 +161,7 @@
         .sidebar-footer {
             margin-top: auto;
             padding-top: 30px;
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             line-height: 1.6;
             color: #000000;
         }
@@ -239,31 +239,33 @@
         }
 
         .detail-title {
-            font-size: 1em;
+            font-size: clamp(17px, 0.9vw, 19px);
             margin: 0 0 8px 0;
         }
 
         .detail-subtitle {
-            font-size: 0.4em;
+            font-size: clamp(11px, 0.75vw, 14px);
             color: #666666;
             margin-bottom: 6px;
         }
 
         .detail-meta {
-            font-size: 0.3em;
+            font-size: clamp(11px, 0.75vw, 14px);
             color: #666666;
             margin-bottom: 15px;
         }
 
         .detail-description {
             line-height: 1.6;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             margin-bottom: 20px;
         }
 
         .detail-divider {
             border-top: .7px solid #343434;
             margin: 0px 0;
+            opacity: 1;
+            transform: none;
         }
 
         .detail-section {
@@ -274,13 +276,13 @@
 
         .detail-section-left {
             flex: 1;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             color: black;
         }
 
         .detail-section-right {
             flex: 2;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             line-height: 1.5;
         }
 
@@ -328,7 +330,6 @@
         .detail-section,
         .detail-images-vertical,
         .detail-images-grid,
-        .detail-divider,
         .noticeme-special-images {
             opacity: 0;
             transform: translateY(30px);
@@ -338,7 +339,6 @@
         .detail-section.visible,
         .detail-images-vertical.visible,
         .detail-images-grid.visible,
-        .detail-divider.visible,
         .noticeme-special-images.visible {
             opacity: 1;
             transform: translateY(0);
@@ -349,7 +349,7 @@
             display: none;
             padding: 20px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: clamp(11px, 0.75vw, 15px);
             line-height: 1.6;
             color: #000000;
             border-top: 1px solid #cccccc;
@@ -458,7 +458,7 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <a href="https://www.yqstudios.com/index.html" class="sidebar-name">Quan Yuan</a>
-            <div class="sidebar-titles">Visual Director | Graphic Designer | Photographer</div>
+            <div class="sidebar-titles">Digital Visual Designer | UI/UX Designer | Photographer</div>
             <div class="sidebar-contact">
                 <a href="mailto:q@yqstudios.com">Email</a>
                 <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
@@ -525,6 +525,8 @@
             
             <div class="detail-content">
                 <img class="detail-image" src="image/Projects/nexvia1.png" alt="Nexvia">
+
+                
                 
                 <div class="detail-info">
                     <div class="detail-info-left">
@@ -623,26 +625,12 @@
             });
         }, observerOptions);
 
-        // 观察所有需要动画的元素 - 从Design Process开始
-        const designProcessDivider = document.querySelector('.detail-divider');
+        // 观察所有需要动画的元素
         const animatedElements = document.querySelectorAll('.detail-section, .detail-images-vertical, .detail-images-grid, .noticeme-special-images');
         
-        // 找到Design Process标题后面的所有元素
-        let startAnimating = false;
-        const allElements = document.querySelectorAll('.detail-divider, .detail-section, .detail-images-vertical, .detail-images-grid, .noticeme-special-images');
-        
-        allElements.forEach(function(element) {
-            // 检查是否到达Design Process部分
-            if (element.querySelector && element.querySelector('.detail-section-left') && 
-                element.querySelector('.detail-section-left').textContent.includes('Design Process')) {
-                startAnimating = true;
-            }
-            
-            // 从Design Process开始应用动画
-            if (startAnimating) {
-                element.classList.remove('visible'); // 初始状态
-                observer.observe(element);
-            }
+        animatedElements.forEach(function(element) {
+            element.classList.remove('visible'); // 初始状态
+            observer.observe(element);
         });
     });
 </script>
