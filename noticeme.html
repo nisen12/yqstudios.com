@@ -43,7 +43,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
         }
 
         .content-nav a {
@@ -87,13 +87,13 @@
         }
 
         .sidebar-name {
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
             font-weight: 500;
             color: #000000;
         }
 
         .sidebar-titles {
-            font-size: 0.8em;
+            font-size: clamp(12px, 0.8vw, 16px);
             color: #666666;
             margin-bottom: 20px;
             line-height: 1.4;
@@ -108,7 +108,7 @@
         }
 
         .sidebar-contact a {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
         }
 
         .works-section {
@@ -116,7 +116,7 @@
         }
 
         .works-header {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #000000;
             display: flex;
             align-items: center;
@@ -145,13 +145,13 @@
         }
 
         .category-title {
-            font-size: 0.9em;
+            font-size: clamp(13px, 0.9vw, 18px);
             margin-bottom: 4px;
             font-weight: 500;
         }
 
         .category-details {
-            font-size: 0.7em;
+            font-size:clamp(11px, 0.75vw, 15px);
             color: #000000;
             margin-left: 0;
             font-weight: 300;
@@ -161,7 +161,7 @@
         .sidebar-footer {
             margin-top: auto;
             padding-top: 30px;
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             line-height: 1.6;
             color: #000000;
         }
@@ -239,25 +239,25 @@
         }
 
         .detail-title {
-            font-size: 1em;
+            font-size: clamp(17px, 0.9vw, 19px);
             margin: 0 0 8px 0;
         }
 
         .detail-subtitle {
-            font-size: 0.4em;
+            font-size: clamp(11px, 0.75vw, 14px);
             color: #666666;
             margin-bottom: 6px;
         }
 
         .detail-meta {
-            font-size: 0.3em;
+            font-size: clamp(11px, 0.75vw, 14px);
             color: #666666;
             margin-bottom: 15px;
         }
 
         .detail-description {
             line-height: 1.6;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             margin-bottom: 20px;
         }
 
@@ -274,13 +274,13 @@
 
         .detail-section-left {
             flex: 1;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             color: black;
         }
 
         .detail-section-right {
             flex: 2;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             line-height: 1.5;
         }
 
@@ -400,7 +400,7 @@
             background-color: #dddddd;
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: clamp(11px, 0.75vw, 14px);
         }
 
         /* Mobile Footer */
@@ -408,7 +408,7 @@
             display: none;
             padding: 20px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: clamp(11px, 0.75vw, 15px);
             line-height: 1.6;
             color: #000000;
             border-top: 1px solid #cccccc;
@@ -517,7 +517,7 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <a href="https://www.yqstudios.com/index.html" class="sidebar-name">Quan Yuan</a>
-            <div class="sidebar-titles">Visual Director | Graphic Designer | Photographer</div>
+            <div class="sidebar-titles">Digital Visual Designer | UI/UX Designer | Photographer</div>
             <div class="sidebar-contact">
                 <a href="mailto:q@yqstudios.com">Email</a>
                 <a href="https://www.instagram.com/nisen12/?img_index=1" target="_blank">Instagram</a>
@@ -532,7 +532,7 @@
 
             <div class="sidebar-category" data-category="forma">
                 <div class="category-title">Forma miniprogram</div>
-                <div class="category-details">Visual Design, Content Design, UX Design, Coding</div>
+                <div class="category-details">Visual Design, Brand Identity, UX Design, Coding</div>
             </div>
             <div class="sidebar-category" data-category="dreamscape">
                 <div class="category-title">Dreamscape</div>
@@ -585,11 +585,11 @@
             <div class="detail-content">
                 <img class="detail-image" src="image/Projects/noticeme1.gif" alt="Noticeme">
 
-                <div class="detail-divider"></div>
+
                 
                 <div class="detail-info">
                     <div class="detail-info-left">
-                        <h1 class="detail-title">Noticeme</h1>
+                        <h1 class="detail-title">Noticeme - Mobile App</h1>
                         <div class="detail-subtitle">Visual Design, Content Design, Web Design, App Design, Visual Composition</div>
                         <div class="detail-meta">Personal Project, 2025</div>
                     </div>
