@@ -44,7 +44,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
         }
 
         .content-nav a {
@@ -88,13 +88,13 @@
         }
 
         .sidebar-name {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             font-weight: 500;
             color: #000000;
         }
 
         .sidebar-titles {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #666666;
             margin-bottom: 20px;
             line-height: 1.4;
@@ -109,7 +109,7 @@
         }
 
         .sidebar-contact a {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
         }
 
         .works-section {
@@ -117,7 +117,7 @@
         }
 
         .works-header {
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #000000;
             display: flex;
             align-items: center;
@@ -146,13 +146,13 @@
         }
 
         .category-title {
-            font-size: 0.9em;
+            font-size: clamp(13px, 0.9vw, 18px);
             margin-bottom: 4px;
             font-weight: 500;
         }
 
         .category-details {
-            font-size: 0.7em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #000000;
             margin-left: 0;
             font-weight: 300;
@@ -162,7 +162,7 @@
         .sidebar-footer {
             margin-top: auto;
             padding-top: 30px;
-            font-size: 0.8em;
+            font-size: clamp(11px, 0.75vw, 15px);
             line-height: 1.6;
             color: #000000;
         }
@@ -240,25 +240,25 @@
         }
 
         .detail-title {
-            font-size: 1em;
+            font-size: clamp(17px, 0.9vw, 19px);
             margin: 0 0 8px 0;
         }
 
         .detail-subtitle {
-            font-size: 0.4em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #666666;
             margin-bottom: 6px;
         }
 
         .detail-meta {
-            font-size: 0.3em;
+            font-size: clamp(11px, 0.75vw, 15px);
             color: #666666;
             margin-bottom: 15px;
         }
 
         .detail-description {
             line-height: 1.6;
-            font-size: 0.3em;
+            font-size: clamp(11px, 0.75vw, 15px);
             margin-bottom: 20px;
         }
 
@@ -288,13 +288,13 @@
 
         .detail-section-left {
             flex: 1;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             color: black;
         }
 
         .detail-section-right {
             flex: 2;
-            font-size: 0.3em;
+            font-size: clamp(12px, 0.75vw, 14px);
             line-height: 1.5;
         }
 
@@ -361,7 +361,7 @@
             line-height: 1.6;
             color: #000000;
             border-top: 1px solid #cccccc;
-            margin-top: 10px;
+            margin-top: clamp(11px, 0.75vw, 15px);
         }
 
         .mobile-footer a {
@@ -542,7 +542,7 @@
                     <div class="detail-info-left">
                         <h1 class="detail-title">Dreamscape - Mobile App</h1>
                         <div class="detail-subtitle">Visual Design, Content Design, Visual Composition<br><br>Tools: Figma · Adobe Suite · ChatGPT · Claude Code · DeepSeek</div>
-                        <div class="detail-meta">Personal Project, 2024</div>
+                        <div class="detail-meta">Personal Project, 2025</div>
                     </div>
                     <div class="detail-info-right">
                         <p class="detail-description">Dreamscape is an innovative mobile application designed to transform the way we interact with our subconscious mind. In a world where mental wellness is increasingly valued, dreams offer profound insights into our emotional states, yet they often fade before we can capture their meaning.<br><br>This project addresses the challenge of dream journaling by creating an emotion-first experience that prioritizes the feelings behind dreams rather than just literal descriptions.  turning subconscious reflections into visual, interactive experiences.</p>
@@ -664,6 +664,7 @@
                 const pageMap = {
                     'forma': 'forma.html',
                     'dreamscape': 'dreamscape.html',
+                    'noticeme': 'noticeme.html',
                     'noticemeweb': 'noticemeweb.html',
                     'dirtparty': 'dirtparty.html',
                     'interaction': 'interaction.html',
