@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quan Yuan - Noticeme Web</title>
     <link rel="icon" type="image/svg+xml" href="image/yqlogo.svg">
     
-    <meta name="description" content="Quan Yuan's UI/UX design portfolio showcasing innovative digital experiences">
-    <meta name="keywords" content="Quan Yuan, UI/UX, portfolio, product design, user experience, visual design">
-    <title>UI/UX Portfolio - Quan Yuan</title>
+    <meta name="description" content="Quan Yuan's uiux project: Noticeme Web">
+    <meta name="keywords" content="Quan Yuan, uiux, Noticeme Web, web design, interaction design">
+    <title>Noticeme Web - Quan Yuan</title>
     <style>
         * {
             margin: 0;
@@ -43,7 +44,6 @@
             top: 0;
             z-index: 10;
             font-size: 0.8em;
-            background-color: #eeeeee;
         }
 
         .content-nav a {
@@ -182,43 +182,120 @@
             padding: 0 10px;
         }
 
-        /* Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 15px;
-            padding: 8px;
+        /* Detail Content */
+        .detail-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
         }
 
-        .grid-item {
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #666666;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s ease;
-            overflow: hidden;
+            padding: 0px 0px;
+            border-radius: 5px;
         }
 
-        .grid-item img {
+        .back-button:hover {
+            color: #A0A0A0;
+            transform: translateX(-5px);
+        }
+
+        .detail-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+
+        .detail-image {
             width: 100%;
             height: auto;
-            object-fit: cover;
+            object-fit: contain;
         }
 
-        .grid-item-title {
-            padding: 8px 0 4px 0;
-            font-weight: bold;
-            font-size: .85em;
-            width: 100%;
-            font-weight: 400;
-            box-sizing: border-box;
+        .detail-info {
+            display: flex;
+            gap: 200px;
+            margin-top: 10px;
         }
 
-        .grid-item-description {
-            padding: 0 0 8px 0;
-            font-size: 0.75em;
+        .detail-info-left {
+            flex: 1;
+        }
+
+        .detail-info-right {
+            flex: 2;
+        }
+
+        .detail-title {
+            font-size: 1em;
+            margin: 0 0 8px 0;
+        }
+
+        .detail-subtitle {
+            font-size: 0.4em;
             color: #666666;
+            margin-bottom: 6px;
+        }
+
+        .detail-meta {
+            font-size: 0.3em;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+
+        .detail-description {
+            line-height: 1.6;
+            font-size: 0.3em;
+            margin-bottom: 20px;
+        }
+
+        .detail-divider {
+            border-top: .7px solid #343434;
+            margin: 0px 0;
+        }
+
+        .detail-section {
+            display: flex;
+            gap: 200px;
+            margin: 10px 0;
+        }
+
+        .detail-section-left {
+            flex: 1;
+            font-size: 0.3em;
+            color: black;
+        }
+
+        .detail-section-right {
+            flex: 2;
+            font-size: 0.3em;
+            line-height: 1.5;
+        }
+
+        .detail-images-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .detail-images-grid img {
             width: 100%;
-            box-sizing: border-box;
-            line-height: 1.4;
-            font-weight: 300;
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
         }
 
         /* Mobile Footer */
@@ -237,12 +314,6 @@
             color: #000000;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .content-nav {
@@ -254,7 +325,7 @@
                 padding: 12px 15px;
                 background-color: #eeeeee;
             }
-            
+
             .sidebar-name,
             .sidebar-titles {
                 display: none;
@@ -264,8 +335,7 @@
                 display: block;
             }
 
-            /* 防止内容被导航栏遮挡 */
-            .content-area {
+            .detail-container {
                 padding-top: 60px;
             }
 
@@ -297,25 +367,26 @@
                 overflow: visible;
             }
             
-            .grid-container {
-                grid-template-columns: 1fr;
+            .detail-info,
+            .detail-section {
+                flex-direction: column;
                 gap: 12px;
-                padding: 6px;
             }
-            
-            .sidebar-footer {
-                display: none;
-            }
-            
-            .mobile-footer {
-                display: block;
+            .detail-images-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px;
+             }
+    
+            .detail-images-grid img {
+                height: auto !important;
+                object-fit: contain !important;
+                max-height: 400px;
             }
             
             .works-section {
                 display: none;
             }
             
-            /* 确保整个页面可以滚动 */
             html, body {
                 overflow-y: auto;
                 height: auto;
@@ -351,7 +422,7 @@
 
             <div class="sidebar-category" data-category="forma">
                 <div class="category-title">Forma miniprogram</div>
-                <div class="category-details">Visual Design, Brand Identity, UX Design, Coding</div>
+                <div class="category-details">Visual Design, Content Design, UX Design, Coding</div>
             </div>
             <div class="sidebar-category" data-category="dreamscape">
                 <div class="category-title">Dreamscape</div>
@@ -396,9 +467,34 @@
             <a href="about.html">About</a>
         </div>
 
-        <!-- Grid View -->
-        <div class="grid-container" id="gridView">
-            <!-- Grid items will be dynamically populated -->
+        <div class="detail-container">
+            <div class="detail-header">
+                <button class="back-button" onclick="window.location.href='uiux.html'">← Back</button>
+            </div>
+            
+            <div class="detail-content">
+                <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe 
+        src="https://player.vimeo.com/video/1137532144" 
+        frameborder="0" 
+        allow="autoplay; fullscreen; picture-in-picture" 
+        allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+</div>
+
+                
+                <div class="detail-info">
+                    <div class="detail-info-left">
+                        <h1 class="detail-title">Noticeme Web</h1>
+                        <div class="detail-subtitle">Web Design, Interaction Design, Content Design</div>
+                        <div class="detail-meta">Startup Project, 2023</div>
+                    </div>
+                    <div class="detail-info-right">
+                        <p class="detail-description">This webpage showcases the core interactions and visual system of Noticeme's desktop experience.<br>Designed with clarity and ease of use in mind, the layout highlights smooth card navigation, clean spending analytics, and a calm, structured interface that reflects the product’s focus on simple, stress-free money management.<br><br>Through thoughtful spacing, soft color accents, and responsive transitions, the page demonstrates how Noticeme brings fast transfers, clear insights, and organized financial flow into a seamless web version — intuitive, friendly, and built for everyday use.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -411,155 +507,37 @@
 </div>
 
 <script>
-// ==================== 项目数据 ====================
-const projects = [
-    {
-        id: 1,
-        title: "Forma miniprogram",
-        category: "forma",
-        image: "image/Projects/formaproject.jpg",
-        description: "Mini-program for Art Study Abroad Studio",
-        page: "forma.html"
-    },
-    {
-        id: 2,
-        title: "Dreamscape",
-        category: "dreamscape",
-        image: "image/Projects/dreamscapeproject.jpg",
-        description: "Immersive Visual Experience Project",
-        page: "dreamscape.html"
-    },
-    {
-        id: 3,
-        title: "Noticeme",
-        category: "noticeme",
-        image: "image/Projects/noticemeproject.jpg",
-        description: "Multi-platform Brand Design Project",
-        page: "noticeme.html"
-    },
-    {
-        id: 4,
-        title: "Noticeme Web",
-        category: "noticemeweb",
-        image: "image/Projects/noticemewebproject.png",
-        description: "Web Design and Interactive Experience",
-        page: "noticemeweb.html"
-    },
-    {
-        id: 5,
-        title: "Dirt party",
-        category: "dirtparty",
-        image: "image/Projects/dirtpartyproject.jpg",
-        description: "Multimedia Brand Visual Design",
-        page: "dirtparty.html"
-    },
-    {
-        id: 6,
-        title: "Interaction Project Web",
-        category: "interaction",
-        image: "image/Projects/interaction.gif",
-        description: "Interaction Design and Web Development",
-        externalLink: "interaction.html"
-    },
-    {
-        id: 7,
-        title: "Nexvia",
-        category: "nexvia",
-        image: "image/Projects/nexviaproject.jpg",
-        description: "Content Strategy and Visual Design",
-        page: "nexvia.html"
-    }
-];
-
-// ==================== DOM 元素 ====================
-const gridView = document.getElementById('gridView');
-const sidebarCategories = document.querySelectorAll('.sidebar-category');
-
-// ==================== 网格视图功能 ====================
-function initializeGrid() {
-    gridView.innerHTML = '';
-    projects.forEach(project => {
-        const gridItem = document.createElement('div');
-        gridItem.className = 'grid-item';
-        gridItem.dataset.id = project.id;
-        
-        gridItem.innerHTML = `
-            <img src="${project.image}" alt="${project.title}">
-            <div class="grid-item-title">${project.title}</div>
-            <div class="grid-item-description">${project.description || ''}</div>
-        `;
-        
-        gridItem.addEventListener('click', () => {
-            if (project.externalLink) {
-                window.location.href = project.externalLink;
-            } else {
-                window.location.href = project.page;
-            }
-        });
-        gridView.appendChild(gridItem);
-    });
-}
-
-// ==================== 侧边栏分类功能 ====================
-function updateSidebarCategory(category) {
-    sidebarCategories.forEach(cat => {
-        cat.classList.remove('active');
-        if (cat.dataset.category === category) {
-            cat.classList.add('active');
+    // 设置当前活动的分类
+    document.addEventListener('DOMContentLoaded', function() {
+        const noticemewebCategory = document.querySelector('.sidebar-category[data-category="noticemeweb"]');
+        if (noticemewebCategory) {
+            noticemewebCategory.classList.add('active');
         }
-    });
-}
-
-function clearSidebarCategory() {
-    sidebarCategories.forEach(cat => {
-        cat.classList.remove('active');
-    });
-}
-
-// ==================== 事件监听器 ====================
-sidebarCategories.forEach(category => {
-    category.addEventListener('click', () => {
-        const categoryType = category.dataset.category;
         
-        updateSidebarCategory(categoryType);
-        
-        gridView.innerHTML = '';
-        const filteredProjects = projects.filter(p => p.category === categoryType);
-        
-        if (filteredProjects.length === 1) {
-            const project = filteredProjects[0];
-            if (project.externalLink) {
-                window.location.href = project.externalLink;
-            } else {
-                window.location.href = project.page;
-            }
-        } else {
-            filteredProjects.forEach(project => {
-                const gridItem = document.createElement('div');
-                gridItem.className = 'grid-item';
-                gridItem.dataset.id = project.id;
+        // 为其他分类添加点击事件
+        const sidebarCategories = document.querySelectorAll('.sidebar-category');
+        sidebarCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                const categoryType = this.dataset.category;
+                if (categoryType === 'noticemeweb') {
+                    return;
+                }
                 
-                gridItem.innerHTML = `
-                    <img src="${project.image}" alt="${project.title}">
-                    <div class="grid-item-title">${project.title}</div>
-                    <div class="grid-item-description">${project.description || ''}</div>
-                `;
+                const pageMap = {
+                    'forma': 'forma.html',
+                    'dreamscape': 'dreamscape.html',
+                    'noticeme': 'noticeme.html',
+                    'dirtparty': 'dirtparty.html',
+                    'interaction': 'interaction.html',
+                    'nexvia': 'nexvia.html'
+                };
                 
-                gridItem.addEventListener('click', () => {
-                    if (project.externalLink) {
-                        window.location.href = project.externalLink;
-                    } else {
-                        window.location.href = project.page;
-                    }
-                });
-                gridView.appendChild(gridItem);
+                if (pageMap[categoryType]) {
+                    window.location.href = pageMap[categoryType];
+                }
             });
-        }
+        });
     });
-});
-
-// ==================== 初始化页面 ====================
-initializeGrid();
 </script>
 
 </body>
